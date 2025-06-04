@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "bite-of-appetite"
+  },
+  "targets": {
+    "bite-of-appetite": {
+      "hosting": {
+        "staging": [
+          "staging-bite-of-appetite"
+        ],
+        "production": [
+          "bite-of-appetite"
+        ]
+      }
+    }
   }
 }
