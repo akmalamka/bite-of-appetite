@@ -34,7 +34,7 @@ steps:
     entrypoint: 'pnpm'
     args:
       - 'run'
-      - 'build'
+      - 'generate'
   - id: 'Deploying'
     name: '${_ARTIFACT_NAME}/${_IMAGE_NAME}'
     entrypoint: 'pnpm'

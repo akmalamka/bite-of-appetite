@@ -88,6 +88,14 @@ export default defineNuxtConfig({
     },
   },
 
+  nitro: {
+    prerender: {
+      // We don't want to crawl the links since we are fetching the pages from Sanity
+      crawlLinks: false,
+    },
+  },
+  // TODO: check if we have to change the crawlLinks to true in the future
+
   sanity: {
     apiVersion: process.env.NUXT_SANITY_API_VERSION || '2024-03-15',
     dataset: process.env.NUXT_SANITY_DATASET,
@@ -99,5 +107,13 @@ export default defineNuxtConfig({
     //   token: process.env.NUXT_SANITY_API_READ_TOKEN,
     // },
     // TODO: add visual editing
+  },
+
+  typescript: {
+    typeCheck: process.env.NODE_ENV === 'development',
+  },
+
+  sourcemap: {
+    client: 'hidden',
   },
 });
