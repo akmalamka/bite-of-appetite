@@ -1,5 +1,5 @@
 substitutions:
-  _ARTIFACT_NAME: 'asia-southeast2-docker.pkg.dev/bite-of-appetite/cloud-build-ci-cd'
+  _ARTIFACT_NAME: 'asia-east1-docker.pkg.dev/bite-of-appetite/cloud-build-ci-cd'
   _IMAGE_NAME: 'biteofappetite'
 
 options:
