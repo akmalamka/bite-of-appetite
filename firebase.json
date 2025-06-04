@@ -13,6 +13,16 @@
         "**/.*",
         "**/node_modules/**"
       ]
+    },
+    {
+      "target": "production",
+      "public": ".output/public",
+      "cleanUrls": true,
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ]
     }
   ]
 }
