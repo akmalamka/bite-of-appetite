@@ -16,7 +16,8 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "deploy": "firebase deploy"
+    "deploy": "firebase deploy",
+    "deploy:staging": "firebase deploy --only hosting:staging"
   },
   "dependencies": {
     "@nuxt/image": "^1.10.0",
