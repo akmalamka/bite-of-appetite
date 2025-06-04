@@ -1,0 +1,32 @@
+{
+  "name": "biteofappetite.com-cms",
+  "version": "1.0.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "keywords": [
+    "sanity"
+  ],
+  "main": "package.json",
+  "scripts": {
+    "dev": "sanity dev",
+    "start": "sanity start",
+    "login": "sanity login",
+    "build": "sanity build",
+    "deploy": "sanity deploy",
+    "gen:extract": "sanity schema extract --path schema-extract.json --enforce-required-fields",
+    "gen:types": "sanity typegen generate && pnpm -w lint:sanity-types",
+    "gen:all": "pnpm gen:extract && pnpm gen:types"
+  },
+  "dependencies": {
+    "@sanity/ui": "^2.8.9",
+    "@sanity/vision": "^3.57.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^5.3.0",
+    "sanity": "^3.57.1",
+    "styled-components": "^6.1.13"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.25"
+  }
+}
