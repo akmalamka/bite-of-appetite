@@ -5,7 +5,12 @@ const { data } = await useSanityHeader();
 </script>
 
 <template>
-  {{ data?.title }}
+  <div>
+    {{ data?.title }}
+    <span>
+      aaa
+    </span>
+  </div>
 </template>
 
 <style lang="postcss" scoped></style>
