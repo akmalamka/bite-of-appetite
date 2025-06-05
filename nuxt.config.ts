@@ -80,7 +80,7 @@ export default defineNuxtConfig({
     autoImport: false,
   },
 
-  modules: ['@unocss/nuxt', '@nuxtjs/sanity', '@nuxtjs/seo', '@nuxt/image'],
+  modules: ['@unocss/nuxt', '@nuxtjs/sanity', '@nuxt/image'],
 
   postcss: {
     plugins: {
