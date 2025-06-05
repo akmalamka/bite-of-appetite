@@ -8,20 +8,24 @@
       "target": "staging",
       "public": ".output/public",
       "cleanUrls": true,
-      "ignore": [
-        "firebase.json",
-        "**/.*",
-        "**/node_modules/**"
+      "rewrites": [
+        {
+          "source": "**",
+          "function": "server_staging",
+          "region": "asia-east1"
+        }
       ]
     },
     {
       "target": "production",
       "public": ".output/public",
       "cleanUrls": true,
-      "ignore": [
-        "firebase.json",
-        "**/.*",
-        "**/node_modules/**"
+      "rewrites": [
+        {
+          "source": "**",
+          "function": "server_production",
+          "region": "asia-east1"
+        }
       ]
     }
   ]

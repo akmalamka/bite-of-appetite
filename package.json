@@ -17,7 +17,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "deploy": "firebase deploy",
-    "deploy:staging": "firebase deploy --only hosting:staging"
+    "deploy:staging": "firebase deploy --only functions:server_staging,hosting:staging"
   },
   "dependencies": {
     "@nuxt/image": "^1.10.0",
@@ -41,6 +41,7 @@
     "@vinicunca/unocss-preset-vinicunca": "^0.2.10",
     "eslint": "^9.28.0",
     "firebase-tools": "^13.35.1",
+    "firebase-functions": "^6.3.2",
     "is-ci": "^3.0.1",
     "lint-staged": "^15.5.2",
     "postcss-nested": "^6.2.0",

@@ -58,7 +58,7 @@ export default defineNuxtConfig({
     format: ['webp'],
   },
 
-  compatibilityDate: '2024-07-15',
+  compatibilityDate: '2025-06-05',
 
   components: {
     dirs: [
@@ -89,12 +89,17 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    prerender: {
-      // We don't want to crawl the links since we are fetching the pages from Sanity
-      crawlLinks: false,
+    firebase: {
+      gen: 2,
+      httpsOptions: {
+        maxInstances: 3,
+        region: 'asia-east1',
+      },
+      nodeVersion: '20',
+      serverFunctionName: `server_${process.env.DEPLOY_ENV}`,
     },
+    preset: 'firebase',
   },
-  // TODO: check if we have to change the crawlLinks to true in the future
 
   sanity: {
     apiVersion: process.env.NUXT_SANITY_API_VERSION || '2024-03-15',
@@ -111,9 +116,5 @@ export default defineNuxtConfig({
 
   typescript: {
     typeCheck: process.env.NODE_ENV === 'development',
-  },
-
-  sourcemap: {
-    client: 'hidden',
   },
 });
