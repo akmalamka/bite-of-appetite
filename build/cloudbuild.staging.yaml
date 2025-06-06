@@ -35,6 +35,10 @@ steps:
     args:
       - 'run'
       - 'build'
+  - id: 'Deploying'
+    name: '${_ARTIFACT_NAME}/${_IMAGE_NAME}'
+    entrypoint: 'pnpm'
+    args: ['deploy:staging']
 
 images:
 - '${_ARTIFACT_NAME}/${_IMAGE_NAME}'
