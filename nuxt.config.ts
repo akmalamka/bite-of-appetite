@@ -1,58 +1,46 @@
 import process from 'node:process';
 
-const BASE_URL = 'https://biteofappetite.com';
-
 export default defineNuxtConfig({
-  // app: {
-  //   head: {
-  //     link: [
-  //       {
-  //         href: '/favicons/apple-touch-icon.png',
-  //         rel: 'apple-touch-icon',
-  //         sizes: '180x180',
-  //       },
-  //       {
-  //         href: '/favicons/favicon-32x32.png',
-  //         rel: 'icon',
-  //         sizes: '32x32',
-  //         type: 'image/png',
-  //       },
-  //       {
-  //         href: '/favicons/favicon-16x16.png',
-  //         rel: 'icon',
-  //         sizes: '16x16',
-  //         type: 'image/png',
-  //       },
-  //       {
-  //         href: '/favicons/site.webmanifest',
-  //         rel: 'manifest',
-  //       },
-  //       {
-  //         color: '#5bbad5',
-  //         href: '/favicons/safari-pinned-tab.svg',
-  //         rel: 'mask-icon',
-  //       },
-  //     ],
-  //     meta: [
-  //       { content: '#411f3a', name: 'msapplication-TileColor' },
-  //       { content: '#411f3a', name: 'theme-color' },
-  //       { content: `${BASE_URL}/images/og-image.jpg`, name: 'og:image' },
-  //     ],
-
-  //     templateParams: {
-  //       separator: '|',
-  //     },
-
-  //     titleTemplate: '%s %separator %siteName',
-  //   },
-  // },
-
-  site: {
-    url: BASE_URL,
-    name: 'Bite of Appetite',
-    defaultLocale: 'en',
-    description: 'Bite of Appetite is a food blog made by Akmal',
+  app: {
+    head: {
+      link: [
+        {
+          rel: 'icon',
+          type: 'image/x-icon',
+          href: '/favicons/favicon.ico',
+        },
+        {
+          rel: 'icon',
+          sizes: '16x16',
+          type: 'image/png',
+          href: '/favicons/favicon-16x16.png',
+        },
+        {
+          rel: 'icon',
+          sizes: '32x32',
+          type: 'image/png',
+          href: '/favicons/favicon-32x32.png',
+        },
+        {
+          rel: 'icon',
+          type: 'image/png',
+          sizes: '96x96',
+          href: '/favicons/favicon-96x96.png',
+        },
+        {
+          rel: 'manifest',
+          href: '/favicons/site.webmanifest',
+        },
+      ],
+    },
   },
+
+  // site: {
+  //   url: BASE_URL,
+  //   name: 'Bite of Appetite',
+  //   defaultLocale: 'en',
+  //   description: 'Bite of Appetite is a food blog made by Akmal',
+  // },
 
   image: {
     format: ['webp'],
