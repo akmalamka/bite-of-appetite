@@ -3,6 +3,11 @@ import process from 'node:process';
 export default defineNuxtConfig({
   app: {
     head: {
+      title: 'Bite of Appetite',
+      meta: [
+        { name: 'description', content: 'Bite of Appetite is a food blog made by Akmal' },
+        { name: 'og:locale', content: 'en' },
+      ],
       link: [
         {
           rel: 'icon',
@@ -36,7 +41,7 @@ export default defineNuxtConfig({
   },
 
   // site: {
-  //   url: BASE_URL,
+  //   // url: BASE_URL,
   //   name: 'Bite of Appetite',
   //   defaultLocale: 'en',
   //   description: 'Bite of Appetite is a food blog made by Akmal',
