@@ -9,7 +9,7 @@
           "staging-bite-of-appetite"
         ],
         "production": [
-          "bite-of-appetite"
+          "production-bite-of-appetite"
         ]
       }
     }
