@@ -17,7 +17,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "deploy": "firebase deploy",
-    "deploy:staging": "firebase deploy --only functions:server_staging,hosting:staging",
+    "deploy:staging": "firebase deploy --force --only functions:server_staging,hosting:staging",
     "deploy:production": "firebase deploy --only functions:server_production,hosting:prodution"
   },
   "dependencies": {
