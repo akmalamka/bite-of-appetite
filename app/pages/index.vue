@@ -5,7 +5,7 @@ const { data } = await useSanityHeader();
 </script>
 
 <template>
-  <div>
+  <div class="color-primary text-h1">
     {{ data?.title }}
     <span>
       aaa

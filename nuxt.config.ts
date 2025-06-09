@@ -40,13 +40,6 @@ export default defineNuxtConfig({
     },
   },
 
-  // site: {
-  //   // url: BASE_URL,
-  //   name: 'Bite of Appetite',
-  //   defaultLocale: 'en',
-  //   description: 'Bite of Appetite is a food blog made by Akmal',
-  // },
-
   image: {
     format: ['webp'],
   },
@@ -59,9 +52,9 @@ export default defineNuxtConfig({
     ],
   },
 
-  // css: [
-  //   '~/designs/styles/index.css',
-  // ],
+  css: [
+    '~/designs/styles/index.css',
+  ],
 
   devtools: { enabled: true },
 
@@ -105,6 +98,10 @@ export default defineNuxtConfig({
     //   token: process.env.NUXT_SANITY_API_READ_TOKEN,
     // },
     // TODO: add visual editing
+  },
+
+  vue: {
+    propsDestructure: true,
   },
 
   typescript: {

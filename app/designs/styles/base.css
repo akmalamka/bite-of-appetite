@@ -1,0 +1,25 @@
+:root {
+  --navbar-height: 80px;
+
+  @screen md {
+    --navbar-height: 96px;
+  }
+}
+
+html {
+  @apply h-full;
+
+  scroll-behavior: smooth;
+
+  scroll-padding-top: calc(
+    var(--navbar-height) + 32px
+  );
+}
+
+body {
+  @apply h-full;
+}
+
+#__nuxt {
+  @apply h-full;
+}
