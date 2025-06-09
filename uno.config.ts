@@ -6,6 +6,7 @@ import {
   transformerDirectives,
   transformerVariantGroup,
 } from 'unocss';
+import { presetCore } from './app/designs/presets';
 
 export default defineConfig({
 
@@ -29,6 +30,7 @@ export default defineConfig({
       },
     }),
     presetWind3(),
+    presetCore(),
     presetTypography(),
   ],
 
