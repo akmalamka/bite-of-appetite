@@ -27,6 +27,7 @@ export function presetCore(): Preset<Theme> {
 
       fontSize: {
         // Desktop
+        'h6': ['20px', { 'font-family': RECOLETA_ALT_STR, 'font-weight': '600' }],
         'h1-inter': ['200px', { 'line-height': '204px', 'font-family': INTER_STR }],
         'h1-recoleta': ['200px', { 'line-height': '204px', 'font-family': RECOLETA_ALT_STR }],
         'h1-yournotes': ['200px', { 'line-height': '204px', 'font-family': YOURNOTES_STR }],
@@ -65,6 +66,9 @@ export function presetCore(): Preset<Theme> {
         'flex-vertical-center': 'flex flex-col justify-center items-center',
         'flex-vertical': 'flex flex-col',
         'flex-y-center': 'flex items-center',
+      },
+      {
+        'offsetted-underline': 'underline underline-offset-3',
       },
     ],
   };

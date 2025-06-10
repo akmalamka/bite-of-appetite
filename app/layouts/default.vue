@@ -20,16 +20,18 @@ const { data } = await useSanityLayoutFetcher();
   <LayoutNavigationMenu
     :data="{
       navigation: data!.navigation,
-      socials: data!.socials,
     }"
     :has-errors="!!error"
   />
 
-  <main class="main z-content relative min-h-[100dvh] bg-white">
+  <main class="z-content relative min-h-[100dvh] bg-white">
     <slot />
   </main>
 
   <LayoutFooter
-    :data="{ footer: data!.footer, socials: data!.socials }"
+    :data="{
+      footer: data!.footer,
+      socials: data!.socials,
+    }"
   />
 </template>
