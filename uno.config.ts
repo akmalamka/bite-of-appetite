@@ -11,7 +11,7 @@ import {
 } from 'unocss';
 
 // TODO: fix presetCore eslint fix issue
-// import { presetCore } from './app/designs/presets';
+import { presetCore } from './app/designs/presets';
 
 export default defineConfig({
   configDeps: getAllConfigFiles('app/designs/presets'),
@@ -36,7 +36,7 @@ export default defineConfig({
       },
     }),
     presetWind3(),
-    // presetCore(),
+    presetCore(),
     presetTypography(),
   ],
 
