@@ -11,9 +11,7 @@ html {
 
   scroll-behavior: smooth;
 
-  scroll-padding-top: calc(
-    var(--navbar-height) + 32px
-  );
+  scroll-padding-top: calc(var(--navbar-height) + 32px);
 }
 
 body {

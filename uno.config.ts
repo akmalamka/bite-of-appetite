@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { presetVinicunca } from '@vinicunca/unocss-preset-vinicunca';
 import {
   defineConfig,
@@ -8,7 +9,9 @@ import {
   transformerDirectives,
   transformerVariantGroup,
 } from 'unocss';
-import { presetCore } from './app/designs/presets';
+
+// TODO: fix presetCore eslint fix issue
+// import { presetCore } from './app/designs/presets';
 
 export default defineConfig({
   configDeps: getAllConfigFiles('app/designs/presets'),
@@ -33,7 +36,7 @@ export default defineConfig({
       },
     }),
     presetWind3(),
-    presetCore(),
+    // presetCore(),
     presetTypography(),
   ],
 
@@ -44,6 +47,7 @@ export default defineConfig({
 });
 
 function getAllConfigFiles(dir: string) {
+  const __dirname = path.dirname(fileURLToPath(import.meta.url));
   const dirFull = path.join(__dirname, dir);
   const files = fs.readdirSync(dirFull);
   return files.filter((file) => path.extname(file) === '.ts').map((file) => path.join(dir, file));

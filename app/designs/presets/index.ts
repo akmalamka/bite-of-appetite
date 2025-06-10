@@ -27,7 +27,9 @@ export function presetCore(): Preset<Theme> {
 
       fontSize: {
         // Desktop
-        'h1': ['200px', { 'line-height': '204px', 'font-family': INTER_STR }],
+        'h1-inter': ['200px', { 'line-height': '204px', 'font-family': INTER_STR }],
+        'h1-recoleta': ['200px', { 'line-height': '204px', 'font-family': RECOLETA_ALT_STR }],
+        'h1-yournotes': ['200px', { 'line-height': '204px', 'font-family': YOURNOTES_STR }],
 
         // Mobile
         'h1-sm': ['72px', { 'line-height': '77px', 'font-family': INTER_STR }],

@@ -3,7 +3,7 @@
     "source.fixAll.eslint": "explicit",
     "source.organizeImports": "never"
   },
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "emmet.showSuggestionsAsSnippets": true,
   "emmet.triggerExpansionOnTab": true,
   "emmet.includeLanguages": {
@@ -26,23 +26,7 @@
     "json5"
   ],
   "typescript.tsdk": "node_modules/typescript/lib",
-
   "editor.quickSuggestions": {
     "strings": true
-  },
-
-  "i18n-ally.localesPaths": [
-    "apps/admin/src/locales/langs"
-  ],
-  "i18n-ally.keystyle": "nested",
-  "i18n-ally.sortKeys": true,
-  "i18n-ally.namespace": true,
-  "i18n-ally.pathMatcher": "{locale}/{namespaces}.{ext}",
-  "i18n-ally.enabledParsers": ["json", "ts", "js"],
-  "i18n-ally.sourceLanguage": "en",
-  "i18n-ally.displayLanguage": "en",
-  "i18n-ally.enabledFrameworks": ["vue", "react"],
-  "i18n-ally.editor.preferEditor": true,
-
-  "material-icon-theme.activeIconPack": "nest"
+  }
 }
