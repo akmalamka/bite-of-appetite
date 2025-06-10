@@ -13,8 +13,50 @@
  */
 
 // Source: schema.json
-// Query TypeMap
-import '@sanity/client';
+export type LinkSelection = string;
+
+export type Header = {
+  _id: string;
+  _type: 'header';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+};
+
+export type SocialMedias = {
+  _id: string;
+  _type: 'socialMedias';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  socials: Array<{
+    title?: string;
+    link: string;
+    _type: 'social';
+    _key: string;
+  }>;
+};
+
+export type LayoutNavigationMenu = {
+  _id: string;
+  _type: 'layoutNavigationMenu';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  order?: number;
+  text?: string;
+  link?: LinkSelection;
+};
+
+export type MediaTag = {
+  _id: string;
+  _type: 'media.tag';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: Slug;
+};
 
 export type SanityImagePaletteSwatch = {
   _type: 'sanity.imagePaletteSwatch';
@@ -121,6 +163,12 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type Slug = {
+  _type: 'slug';
+  current: string;
+  source?: string;
+};
+
 export type SanityAssetSourceData = {
   _type: 'sanity.assetSourceData';
   name?: string;
@@ -128,33 +176,30 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type Header = {
-  _id: string;
-  _type: 'header';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-};
-
-export type MediaTag = {
-  _id: string;
-  _type: 'media.tag';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: Slug;
-};
-
-export type Slug = {
-  _type: 'slug';
-  current: string;
-  source?: string;
-};
-
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | SanityAssetSourceData | Header | MediaTag | Slug;
+export type AllSanitySchemaTypes = LinkSelection | Header | SocialMedias | LayoutNavigationMenu | MediaTag | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../sanity/sanity.fetcher.ts
+// Variable: layoutQuery
+// Query: {      'footer': *[_type == 'layoutFooter'][0],      'socials': *[_type == 'socialMedias'][0].socials,      'navigation': *[        _type == 'layoutNavigationMenu'      ] | order(order asc)    }
+export type LayoutQueryResult = {
+  footer: null;
+  socials: Array<{
+    title?: string;
+    link: string;
+    _type: 'social';
+    _key: string;
+  }> | null;
+  navigation: Array<{
+    _id: string;
+    _type: 'layoutNavigationMenu';
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    order?: number;
+    text?: string;
+    link?: LinkSelection;
+  }>;
+};
 // Variable: pageQuery
 // Query: *[      _type == 'header'    ][0]
 export type PageQueryResult = {
@@ -165,8 +210,13 @@ export type PageQueryResult = {
   _rev: string;
   title?: string;
 } | null;
+
+// Query TypeMap
+import '@sanity/client';
+
 declare module '@sanity/client' {
   interface SanityQueries {
+    '\n    {\n      \'footer\': *[_type == \'layoutFooter\'][0],\n      \'socials\': *[_type == \'socialMedias\'][0].socials,\n      \'navigation\': *[\n        _type == \'layoutNavigationMenu\'\n      ] | order(order asc)\n    }\n  ': LayoutQueryResult;
     '\n    *[\n      _type == \'header\'\n    ][0]\n  ': PageQueryResult;
   }
 }

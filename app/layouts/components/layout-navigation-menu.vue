@@ -4,12 +4,9 @@
 
 <template>
   <div>
-    Navigation Menuaaa
+    Navigation Menu
   </div>
 </template>
 
 <style lang="postcss" scoped>
-.abcd {
-  font-style: italic;
-}
 </style>

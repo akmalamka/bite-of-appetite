@@ -23,6 +23,7 @@ export default vinicuncaESLint(
     rules: {
       'ts/consistent-type-definitions': 'off',
       'ts/no-use-before-define': 'off',
+      'sonar/redundant-type-aliases': 'off',
     },
   },
 );
