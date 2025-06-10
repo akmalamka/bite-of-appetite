@@ -1,6 +1,7 @@
-import type { Header, LayoutQueryResult } from './sanity.entity';
+import type { LayoutQueryResult, PageQueryResult } from './sanity.entity';
 
-import { groq, useSanityQuery } from '#imports';
+import { groq, useRoute, useSanityQuery } from '#imports';
+import { pageQuery } from './sanity.query';
 
 export function useSanityLayoutFetcher() {
   const layoutQuery = groq`
@@ -16,12 +17,10 @@ export function useSanityLayoutFetcher() {
   return useSanityQuery<LayoutQueryResult>(layoutQuery);
 }
 
-export function useSanityHeader() {
-  const pageQuery = groq`
-    *[
-      _type == 'header'
-    ][0]
-  `;
+export function useSanityPage() {
+  const route = useRoute();
 
-  return useSanityQuery<Header>(pageQuery);
+  return useSanityQuery<PageQueryResult>(pageQuery, {
+    slug: route.path,
+  });
 }

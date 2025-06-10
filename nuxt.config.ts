@@ -49,6 +49,7 @@ export default defineNuxtConfig({
   components: {
     dirs: [
       './core/components',
+      './blocks/components',
     ],
   },
 
