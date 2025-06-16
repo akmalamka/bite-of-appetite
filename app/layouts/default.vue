@@ -24,14 +24,14 @@ const { data } = await useSanityLayoutFetcher();
     :has-errors="!!error"
   />
 
-  <main class="z-content relative top-$navbar-height min-h-[100dvh] bg-white">
+  <main class="z-content">
     <slot />
   </main>
 
   <LayoutFooter
     :data="{
-      footer: data!.footer,
       socials: data!.socials,
+      navigation: data!.navigation,
     }"
   />
 </template>

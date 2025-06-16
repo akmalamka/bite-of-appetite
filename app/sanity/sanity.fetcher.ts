@@ -6,7 +6,6 @@ import { pageQuery } from './sanity.query';
 export function useSanityLayoutFetcher() {
   const layoutQuery = groq`
     {
-      'footer': *[_type == 'layoutFooter'][0],
       'socials': *[_type == 'socialMedias'][0].socials,
       'navigation': *[
         _type == 'layoutNavigationMenu'

@@ -212,9 +212,8 @@ export type AllSanitySchemaTypes = LinkSelection | HeroTitle | Header | SocialMe
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../sanity/sanity.fetcher.ts
 // Variable: layoutQuery
-// Query: {      'footer': *[_type == 'layoutFooter'][0],      'socials': *[_type == 'socialMedias'][0].socials,      'navigation': *[        _type == 'layoutNavigationMenu'      ] | order(order asc)    }
+// Query: {      'socials': *[_type == 'socialMedias'][0].socials,      'navigation': *[        _type == 'layoutNavigationMenu'      ] | order(order asc)    }
 export type LayoutQueryResult = {
-  footer: null;
   socials: Array<{
     title?: string;
     link: string;
@@ -264,7 +263,7 @@ import '@sanity/client';
 
 declare module '@sanity/client' {
   interface SanityQueries {
-    '\n    {\n      \'footer\': *[_type == \'layoutFooter\'][0],\n      \'socials\': *[_type == \'socialMedias\'][0].socials,\n      \'navigation\': *[\n        _type == \'layoutNavigationMenu\'\n      ] | order(order asc)\n    }\n  ': LayoutQueryResult;
+    '\n    {\n      \'socials\': *[_type == \'socialMedias\'][0].socials,\n      \'navigation\': *[\n        _type == \'layoutNavigationMenu\'\n      ] | order(order asc)\n    }\n  ': LayoutQueryResult;
     '\n  *[\n    _type == \'pages\'\n    && url.current == $slug\n  ][0] {\n    title,\n    description,\n    ogImage,\n    components[] {\n      ...,\n    },\n  }\n': PageQueryResult;
   }
 }

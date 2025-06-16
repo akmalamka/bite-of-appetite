@@ -10,7 +10,6 @@ export const schemaTypes = [
   navigationMenuSchema,
   socialMediasSchema,
   headerSchema,
-
   // Blocks Components
   heroTitleSchema,
 

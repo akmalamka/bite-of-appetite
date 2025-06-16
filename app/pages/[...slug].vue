@@ -19,12 +19,64 @@ useHead({
 </script>
 
 <template>
-  <div>
-    <component
-      :is="BLOCK_COMPONENTS[component._type as BlockComponentsKeys]"
-      v-for="component in data?.components"
-      :key="component._key"
-      :data="component as any"
-    />
-  </div>
+  <component
+    :is="BLOCK_COMPONENTS[component._type as BlockComponentsKeys]"
+    v-for="component in data?.components"
+    :key="component._key"
+    :data="component as any"
+  />
+  <component
+    :is="BLOCK_COMPONENTS[component._type as BlockComponentsKeys]"
+    v-for="component in data?.components"
+    :key="component._key"
+    :data="component as any"
+  />
+  <component
+    :is="BLOCK_COMPONENTS[component._type as BlockComponentsKeys]"
+    v-for="component in data?.components"
+    :key="component._key"
+    :data="component as any"
+  />
+  <component
+    :is="BLOCK_COMPONENTS[component._type as BlockComponentsKeys]"
+    v-for="component in data?.components"
+    :key="component._key"
+    :data="component as any"
+  />
+  <component
+    :is="BLOCK_COMPONENTS[component._type as BlockComponentsKeys]"
+    v-for="component in data?.components"
+    :key="component._key"
+    :data="component as any"
+  />
+  <component
+    :is="BLOCK_COMPONENTS[component._type as BlockComponentsKeys]"
+    v-for="component in data?.components"
+    :key="component._key"
+    :data="component as any"
+  />
+  <component
+    :is="BLOCK_COMPONENTS[component._type as BlockComponentsKeys]"
+    v-for="component in data?.components"
+    :key="component._key"
+    :data="component as any"
+  />
+  <component
+    :is="BLOCK_COMPONENTS[component._type as BlockComponentsKeys]"
+    v-for="component in data?.components"
+    :key="component._key"
+    :data="component as any"
+  />
+  <component
+    :is="BLOCK_COMPONENTS[component._type as BlockComponentsKeys]"
+    v-for="component in data?.components"
+    :key="component._key"
+    :data="component as any"
+  />
+  <component
+    :is="BLOCK_COMPONENTS[component._type as BlockComponentsKeys]"
+    v-for="component in data?.components"
+    :key="component._key"
+    :data="component as any"
+  />
 </template>

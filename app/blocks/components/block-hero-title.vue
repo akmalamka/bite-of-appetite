@@ -7,7 +7,7 @@ defineProps<{
 </script>
 
 <template>
-  <section>
+  <section class="first:mt-$navbar-height">
     <h1 class="text-h1-inter">
       {{ data.title }}
     </h1>
