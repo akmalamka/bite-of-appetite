@@ -24,7 +24,7 @@ const { data } = await useSanityLayoutFetcher();
     :has-errors="!!error"
   />
 
-  <main class="z-content relative min-h-[100dvh] bg-white">
+  <main class="z-content relative top-$navbar-height min-h-[100dvh] bg-white">
     <slot />
   </main>
 
