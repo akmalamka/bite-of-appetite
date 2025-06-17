@@ -31,7 +31,7 @@ export const heroImageSchema = defineType({
       name: 'typingTexts',
       description: 'These texts will appear one by one as a typing text',
       type: 'array',
-      validation: (rule) => rule.required().min(1).error('Typing texts must have at least 1 text'),
+      validation: (rule) => rule.min(1).error('Typing texts must have at least 1 text'),
       of: [
         defineArrayMember({
           name: 'typingText',
@@ -51,6 +51,45 @@ export const heroImageSchema = defineType({
       type: 'imageWithAlt',
       validation: (rule) => rule.required(),
     }),
-
+    defineField({
+      name: 'imagePosition',
+      title: 'Image Position',
+      type: 'string',
+      options: {
+        list: [
+          {
+            title: 'Left',
+            value: 'left',
+          },
+          {
+            title: 'Right',
+            value: 'right',
+          },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'left',
+      validation: (rule) => rule.required().error('Please select an image position.'),
+    }),
+    defineField({
+      name: 'ctaButton',
+      description: 'If this field is left empty, there will be no buttons displayed',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'ctaText',
+          type: 'string',
+          title: 'CTA Text',
+          validation: (rule) => rule.required(),
+        }),
+        defineField({
+          name: 'ctaLink',
+          title: 'CTA Link',
+          type: 'linkSelection',
+          validation: (rule) => rule.required(),
+        }),
+      ],
+      title: 'CTA Button',
+    }),
   ],
 });

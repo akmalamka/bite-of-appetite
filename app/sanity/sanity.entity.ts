@@ -39,6 +39,11 @@ export type HeroImage = {
     alt: string;
     _type: 'imageWithAlt';
   };
+  imagePosition: 'left' | 'right';
+  ctaButton?: {
+    ctaText: string;
+    ctaLink: LinkSelection;
+  };
 };
 
 export type ImageWithAlt = {
@@ -307,6 +312,11 @@ export type PageQueryResult = {
         altText: string | null;
         _ref: string;
       } | null;
+    };
+    imagePosition: 'left' | 'right';
+    ctaButton?: {
+      ctaText: string;
+      ctaLink: LinkSelection;
     };
   } | {
     _key: string;

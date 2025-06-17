@@ -7,25 +7,59 @@ defineProps<{
 </script>
 
 <template>
-  <section class="grid grid-cols-1 md:grid-cols-2">
+  <section
+    class="grid grid-cols-1 md:grid-cols-2"
+    :class="{
+      'block-hero-image-left': data.imagePosition === 'left',
+      'block-hero-image-right': data.imagePosition === 'right',
+    }"
+  >
     <CoreSanityImage
       :image="data.image!"
       class="grid-cols-1 max-h-75dvh object-cover object-center md:(size-full max-h-full)"
+      :class="{
+        'order-1': data.imagePosition === 'left',
+        'order-2': data.imagePosition === 'right',
+      }"
     />
-    <div class="bg-primary grid-cols-1">
-      <div class="flex-vertical color-primary-light size-full justify-between py-8 container md:(px-8 pb-8 pt-$navbar-height)">
+    <div
+      class="grid-cols-1"
+      :class="{
+        'order-1 bg-primary-light': data.imagePosition === 'right',
+        'order-2 bg-primary': data.imagePosition === 'left',
+      }"
+    >
+      <div
+        class="flex-vertical size-full gap-y-4 py-8 container md:(px-8 pb-8) first:pt-$navbar-height"
+        :class="{
+          'justify-between color-primary-light': data.imagePosition === 'left',
+          'color-primary': data.imagePosition === 'right',
+        }"
+      >
         <h1 class="text-h3-sm md:text-h3 md:(pt-12)">
           {{ data.title }}
           <br>
           <CoreTypingTexts
+            v-if="data.typingTexts"
             :text="data.typingTexts"
           />
         </h1>
         <h2
-          class="text-body-medium w-1/2"
+          class="w text-body-medium"
+          :class="{
+            'w-1/2': data.imagePosition === 'left',
+            'w-full': data.imagePosition === 'right',
+          }"
         >
           {{ data.subtitle }}
         </h2>
+        <CoreButton
+          v-if="data.ctaButton"
+          :to="data.ctaButton.ctaLink"
+          variant="filled"
+        >
+          {{ data.ctaButton.ctaText }}
+        </CoreButton>
       </div>
     </div>
   </section>
