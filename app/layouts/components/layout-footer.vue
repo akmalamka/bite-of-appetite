@@ -10,13 +10,13 @@ defineProps<{
 </script>
 
 <template>
-  <footer class="z-content bg-primary color-primary-light">
+  <footer class="bg-primary color-primary-light z-content">
     <div class="inset-x-0 bottom-0 grid grid-cols-1 gap-4 py-12 container md:grid-cols-4">
       <div class="flex-vertical justify-center gap-y-4 md:(col-span-2 justify-start)">
         <CoreLogo
           class="h-full self-center md:(h-40px self-start)"
         />
-        <span class="text-body-sm text-center md:text-start">
+        <span class="text-body-small text-center md:text-start">
           Made with Love in Bogor, Indonesia <br>
           Branding and Design by
           <NuxtLink
@@ -54,13 +54,12 @@ defineProps<{
           <li
             v-for="social in data?.socials"
             :key="social._key"
-            class="color-primary-light text-body-lg"
+            class="color-primary-light text-body-large"
           >
             <NuxtLink
               :to="social.link"
               target="_blank"
               class="hover:offsetted-underline transition-colors-280"
-              `
             >
               {{ social.title }}
             </NuxtLink>

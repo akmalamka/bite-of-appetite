@@ -30,14 +30,14 @@ function handleMenuClick(menuLink: string) {
         :key="menu._id"
         :to="menu.link"
         class="text-h6 color-primary-light"
-        active-class=" decoration-1 offsetted-underline"
+        active-class="decoration-1 offsetted-underline"
         @click="handleMenuClick(menu.link!)"
       >
         {{ menu.text }}
       </NuxtLink>
     </div>
 
-    <div class="text-body-lg color-primary-light flex justify-between">
+    <div class="text-body-large color-primary-light flex justify-between">
       <NuxtLink
         v-for="social in data.socials"
         :key="social._key"

@@ -7,12 +7,15 @@ import { useIsDesktop } from '~/core/composables/use-is-desktop';
 import LayoutHamburgerMenu from './layout-hamburger-menu.vue';
 import LayoutNavigationMenuMobile from './layout-navigation-menu-mobile.vue';
 
-defineProps<{
+withDefaults(defineProps<{
   data: {
     navigation: Array<LayoutNavigationMenu>;
     socials: null | SocialMedias['socials'];
   };
-}>();
+  hasErrors?: boolean;
+}>(), {
+  hasErrors: false,
+});
 
 const route = useRoute();
 const isDesktop = useIsDesktop();
@@ -80,10 +83,12 @@ useIntersectionObserver(
       >
         <CoreLogo
           class="h-40px transition-color-280"
-          :class="{
-            'color-primary-light': hasScrolled,
-            'color-primary': !hasScrolled,
-          }"
+          :class="
+            hasErrors ? 'color-primary-light'
+            : {
+              'color-primary': !hasScrolled,
+              'color-primary-light': hasScrolled,
+            }"
         />
       </NuxtLink>
 

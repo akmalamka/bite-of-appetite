@@ -27,15 +27,18 @@ export function presetCore(): Preset<Theme> {
 
       fontSize: {
         // Desktop
+        'h1': ['150px', { 'font-family': RECOLETA_ALT_STR, 'font-weight': '700' }],
+        'h5': ['30px', { 'font-family': RECOLETA_ALT_STR, 'font-weight': '600' }],
+        'h5-accent': ['30px', { 'font-family': YOURNOTES_STR, 'font-weight': '400' }],
         'h6': ['20px', { 'font-family': RECOLETA_ALT_STR, 'font-weight': '600' }],
-        'body-lg': ['18px', { 'font-family': INTER_STR }],
-        'body-sm': ['14px', { 'font-family': INTER_STR }],
-        'h1-inter': ['200px', { 'line-height': '204px', 'font-family': INTER_STR }],
-        'h1-recoleta': ['200px', { 'line-height': '204px', 'font-family': RECOLETA_ALT_STR }],
-        'h1-yournotes': ['200px', { 'line-height': '204px', 'font-family': YOURNOTES_STR }],
+        'body-large': ['18px', { 'font-family': INTER_STR }],
+        'body-small': ['14px', { 'font-family': INTER_STR }],
+        'button': ['14px', { 'text-transform': 'uppercase', 'font-family': INTER_STR }],
 
         // Mobile
-        'h1-sm': ['72px', { 'line-height': '77px', 'font-family': INTER_STR }],
+        'h1-sm': ['80px', { 'font-family': RECOLETA_ALT_STR, 'font-weight': '700' }],
+        'h5-sm': ['25px', { 'font-family': RECOLETA_ALT_STR, 'font-weight': '600' }],
+        'h6-sm': ['18px', { 'font-family': INTER_STR }],
       },
 
       zIndex: {
@@ -56,6 +59,8 @@ export function presetCore(): Preset<Theme> {
         },
         white: '#FFFFFF',
         black: '#000000',
+        red: '#FF8361',
+        green: '#92A64E',
       },
     },
 
