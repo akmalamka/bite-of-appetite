@@ -10,7 +10,7 @@ defineProps<{
 </script>
 
 <template>
-  <footer class="z-content color-primary-light bg-primary">
+  <footer class="z-content bg-primary color-primary-light">
     <div class="inset-x-0 bottom-0 grid grid-cols-1 gap-4 py-12 container md:grid-cols-4">
       <div class="flex-vertical justify-center gap-y-4 md:(col-span-2 justify-start)">
         <CoreLogo
@@ -39,13 +39,13 @@ defineProps<{
           © Bite of Appetite. {{ new Date().getFullYear() }}
         </span>
       </div>
-      <div class="grid col-span-1 grid-cols-2 flex justify-between gap-x-4 md:col-span-2">
+      <div class="grid col-span-1 grid-cols-2 mx-12 flex justify-between gap-x-4 md:col-span-2">
         <div class="flex-vertical col-span-1 gap-y-3 md:items-start">
           <NuxtLink
             v-for="menu in data?.navigation"
             :key="menu._id"
             :to="menu.link"
-            class="text-h6 hover:offsetted-underline cursor-pointer transition-colors-280"
+            class="hover:offsetted-underline text-h6 cursor-pointer transition-colors-280"
           >
             {{ menu.text }}
           </NuxtLink>
