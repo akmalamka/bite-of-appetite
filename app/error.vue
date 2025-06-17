@@ -15,15 +15,15 @@ defineProps<{
           alt="coffee pot"
           class="z-background fluid-h-200-400 fluid-top-160-240 fluid-left-200-350 absolute hidden rotate-5 md:block"
         />
-        <div class="md:flex-center text-primary-light mt-164px h-full flex-col gap-y-4 text-center container md:(mt-0)">
+        <div class="text-primary-light md:flex-center mt-164px h-full flex-col gap-y-4 text-center container md:(mt-0)">
           <h1 class="text-h1-sm md:text-h1">
             {{ error?.statusCode }}
           </h1>
           <p
             v-if="error.statusCode === 404"
-            class="text-h5-sm md:text-h5 md:(max-w-110)"
+            class="text-h4-sm md:text-h4 md:(max-w-110)"
           >
-            Oops! Looks like you followed <span class="text-h5-accent"> a bad link.</span>
+            Oops! Looks like you followed <span class="text-h4-accent"> a bad link.</span>
           </p>
           <!-- this is for internal display, to help debugging non-404 errors -->
           <div

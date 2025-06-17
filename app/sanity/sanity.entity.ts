@@ -15,6 +15,12 @@
 // Source: schema.json
 export type LinkSelection = string;
 
+export type HeroQuote = {
+  _type: 'heroQuote';
+  quote: string;
+  author?: string;
+};
+
 export type HeroImage = {
   _type: 'heroImage';
   title: string;
@@ -114,7 +120,9 @@ export type Pages = {
     _key: string;
   } & HeroTitle | {
     _key: string;
-  } & HeroImage>;
+  } & HeroImage | {
+    _key: string;
+  } & HeroQuote>;
 };
 
 export type MediaTag = {
@@ -244,7 +252,7 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type AllSanitySchemaTypes = LinkSelection | HeroImage | ImageWithAlt | HeroTitle | Header | SocialMedias | LayoutNavigationMenu | Pages | MediaTag | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes = LinkSelection | HeroQuote | HeroImage | ImageWithAlt | HeroTitle | Header | SocialMedias | LayoutNavigationMenu | Pages | MediaTag | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../sanity/sanity.fetcher.ts
 // Variable: layoutQuery
@@ -300,6 +308,11 @@ export type PageQueryResult = {
         _ref: string;
       } | null;
     };
+  } | {
+    _key: string;
+    _type: 'heroQuote';
+    quote: string;
+    author?: string;
   } | {
     _key: string;
     _type: 'heroTitle';

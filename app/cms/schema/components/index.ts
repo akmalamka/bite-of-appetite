@@ -9,4 +9,8 @@ export const componentMembers = [
     name: 'heroImage',
     type: 'heroImage',
   }),
+  defineArrayMember({
+    name: 'heroQuote',
+    type: 'heroQuote',
+  }),
 ];

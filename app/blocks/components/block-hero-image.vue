@@ -14,7 +14,7 @@ defineProps<{
     />
     <div class="bg-primary grid-cols-1">
       <div class="flex-vertical color-primary-light size-full justify-between py-8 container md:(px-8 pb-8 pt-$navbar-height)">
-        <h1 class="text-h4-sm md:text-h4 md:(pt-12)">
+        <h1 class="text-h3-sm md:text-h3 md:(pt-12)">
           {{ data.title }}
           <br>
           <CoreTypingTexts

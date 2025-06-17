@@ -1,4 +1,5 @@
 import { heroImageSchema } from './components/hero-image.schema';
+import { heroQuoteSchema } from './components/hero-quote.schema';
 import { heroTitleSchema } from './components/hero-title.schema';
 import { imageWithAltSchema } from './fields/image-with-alt';
 import { linkSelectionSchema } from './fields/link-selection/link-selection.schema';
@@ -15,6 +16,7 @@ export const schemaTypes = [
   // Blocks Components
   heroTitleSchema,
   heroImageSchema,
+  heroQuoteSchema,
 
   // Custom Fields
   linkSelectionSchema,
