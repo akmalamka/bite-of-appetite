@@ -1,4 +1,5 @@
 import { groq } from '#imports';
+import { PAGE_IMAGE_QUERY } from './image-query';
 
 export const pageQuery = groq`
   *[
@@ -10,6 +11,7 @@ export const pageQuery = groq`
     ogImage,
     components[] {
       ...,
+      ${PAGE_IMAGE_QUERY}
     },
   }
 `;

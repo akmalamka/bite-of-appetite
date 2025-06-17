@@ -28,15 +28,18 @@ export function presetCore(): Preset<Theme> {
       fontSize: {
         // Desktop
         'h1': ['150px', { 'font-family': RECOLETA_ALT_STR, 'font-weight': '700' }],
+        'h4': ['54px', { 'font-family': RECOLETA_ALT_STR, 'font-weight': '600' }],
         'h5': ['30px', { 'font-family': RECOLETA_ALT_STR, 'font-weight': '600' }],
         'h5-accent': ['30px', { 'font-family': YOURNOTES_STR, 'font-weight': '400' }],
         'h6': ['20px', { 'font-family': RECOLETA_ALT_STR, 'font-weight': '600' }],
         'body-large': ['18px', { 'font-family': INTER_STR }],
+        'body-medium': ['16px', { 'line-height': '28px', 'font-family': INTER_STR }],
         'body-small': ['14px', { 'font-family': INTER_STR }],
         'button': ['14px', { 'text-transform': 'uppercase', 'font-family': INTER_STR }],
 
         // Mobile
         'h1-sm': ['80px', { 'font-family': RECOLETA_ALT_STR, 'font-weight': '700' }],
+        'h4-sm': ['40px', { 'font-family': RECOLETA_ALT_STR, 'font-weight': '600' }],
         'h5-sm': ['25px', { 'font-family': RECOLETA_ALT_STR, 'font-weight': '600' }],
         'h6-sm': ['18px', { 'font-family': INTER_STR }],
       },

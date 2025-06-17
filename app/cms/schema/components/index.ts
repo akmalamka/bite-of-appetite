@@ -5,4 +5,8 @@ export const componentMembers = [
     name: 'heroTitle',
     type: 'heroTitle',
   }),
+  defineArrayMember({
+    name: 'heroImage',
+    type: 'heroImage',
+  }),
 ];

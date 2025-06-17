@@ -15,6 +15,40 @@
 // Source: schema.json
 export type LinkSelection = string;
 
+export type HeroImage = {
+  _type: 'heroImage';
+  title: string;
+  typingTexts: Array<string>;
+  subtitle: string;
+  image: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: 'imageWithAlt';
+  };
+};
+
+export type ImageWithAlt = {
+  _type: 'imageWithAlt';
+  asset?: {
+    _ref: string;
+    _type: 'reference';
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+  };
+  media?: unknown;
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
+  alt: string;
+};
+
 export type HeroTitle = {
   _type: 'heroTitle';
   title: string;
@@ -78,7 +112,9 @@ export type Pages = {
   };
   components?: Array<{
     _key: string;
-  } & HeroTitle>;
+  } & HeroTitle | {
+    _key: string;
+  } & HeroImage>;
 };
 
 export type MediaTag = {
@@ -208,7 +244,7 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type AllSanitySchemaTypes = LinkSelection | HeroTitle | Header | SocialMedias | LayoutNavigationMenu | Pages | MediaTag | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes = LinkSelection | HeroImage | ImageWithAlt | HeroTitle | Header | SocialMedias | LayoutNavigationMenu | Pages | MediaTag | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../sanity/sanity.fetcher.ts
 // Variable: layoutQuery
@@ -234,7 +270,7 @@ export type LayoutQueryResult = {
 
 // Source: ../sanity/sanity.query.ts
 // Variable: pageQuery
-// Query: *[    _type == 'pages'    && url.current == $slug  ][0] {    title,    description,    ogImage,    components[] {      ...,    },  }
+// Query: *[    _type == 'pages'    && url.current == $slug  ][0] {    title,    description,    ogImage,    components[] {      ...,        _type == 'heroImage' => {    ...,    image {        asset->{    "dimensions": metadata.dimensions,    "lqip": metadata.lqip,    altText,    "_ref": _id  }    }  },    },  }
 export type PageQueryResult = {
   title: string | null;
   description: string | null;
@@ -252,6 +288,20 @@ export type PageQueryResult = {
   } | null;
   components: Array<{
     _key: string;
+    _type: 'heroImage';
+    title: string;
+    typingTexts: Array<string>;
+    subtitle: string;
+    image: {
+      asset: {
+        dimensions: SanityImageDimensions | null;
+        lqip: string | null;
+        altText: string | null;
+        _ref: string;
+      } | null;
+    };
+  } | {
+    _key: string;
     _type: 'heroTitle';
     title: string;
     subtitle?: string;
@@ -264,6 +314,6 @@ import '@sanity/client';
 declare module '@sanity/client' {
   interface SanityQueries {
     '\n    {\n      \'socials\': *[_type == \'socialMedias\'][0].socials,\n      \'navigation\': *[\n        _type == \'layoutNavigationMenu\'\n      ] | order(order asc)\n    }\n  ': LayoutQueryResult;
-    '\n  *[\n    _type == \'pages\'\n    && url.current == $slug\n  ][0] {\n    title,\n    description,\n    ogImage,\n    components[] {\n      ...,\n    },\n  }\n': PageQueryResult;
+    '\n  *[\n    _type == \'pages\'\n    && url.current == $slug\n  ][0] {\n    title,\n    description,\n    ogImage,\n    components[] {\n      ...,\n      \n  _type == \'heroImage\' => {\n    ...,\n    image {\n      \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n    }\n  },\n\n    },\n  }\n': PageQueryResult;
   }
 }
