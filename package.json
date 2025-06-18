@@ -26,6 +26,7 @@
     "@portabletext/vue": "^1.0.12",
     "@vinicunca/perkakas": "^1.6.0",
     "@vueuse/core": "^13.3.0",
+    "embla-carousel-vue": "^8.6.0",
     "nuxt": "3.17.5",
     "radix-vue": "^1.9.17",
     "unocss": "^66.1.4",

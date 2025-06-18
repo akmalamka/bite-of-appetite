@@ -20,7 +20,7 @@ withDefaults(defineProps<CoreButtonProps>(), {
     :is="to ? NuxtLink : 'button'"
     :to="to"
     :target="to?.startsWith('/') ? undefined : '_blank'"
-    class="group w-fit flex items-center gap-2 rounded-full text-center outline-none transition-colors duration-300"
+    class="w-fit flex items-center gap-2 rounded-full text-center outline-none transition-colors duration-300"
     :class="[
       `core-button--${variant}`, {
         'pointer-events-none opacity-50': disabled,

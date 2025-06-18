@@ -13,4 +13,8 @@ export const componentMembers = [
     name: 'heroQuote',
     type: 'heroQuote',
   }),
+  defineArrayMember({
+    name: 'imageCarousel',
+    type: 'imageCarousel',
+  }),
 ];

@@ -36,7 +36,7 @@ defineProps<{
           'color-primary': data.imagePosition === 'right',
         }"
       >
-        <h1 class="text-h3-sm md:text-h3 md:(pt-12)">
+        <h1 class="text-h2-sm md:text-h2 md:(pt-12)">
           {{ data.title }}
           <br>
           <CoreTypingTexts

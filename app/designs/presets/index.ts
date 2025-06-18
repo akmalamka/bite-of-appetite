@@ -28,7 +28,8 @@ export function presetCore(): Preset<Theme> {
       fontSize: {
         // Desktop
         'h1': ['150px', { 'font-family': RECOLETA_ALT_STR, 'font-weight': '700' }],
-        'h3': ['54px', { 'font-family': RECOLETA_ALT_STR, 'font-weight': '600' }],
+        'h2': ['54px', { 'font-family': RECOLETA_ALT_STR, 'font-weight': '600' }],
+        'h3': ['44px', { 'font-family': RECOLETA_ALT_STR, 'font-weight': '600' }],
         'h4': ['30px', { 'font-family': RECOLETA_ALT_STR, 'font-weight': '600' }],
         'h4-accent': ['30px', { 'font-family': YOURNOTES_STR, 'font-weight': '400' }],
         'h5': ['24px', { 'font-family': RECOLETA_ALT_STR, 'font-weight': '300' }],
@@ -40,7 +41,8 @@ export function presetCore(): Preset<Theme> {
 
         // Mobile
         'h1-sm': ['80px', { 'font-family': RECOLETA_ALT_STR, 'font-weight': '700' }],
-        'h3-sm': ['40px', { 'font-family': RECOLETA_ALT_STR, 'font-weight': '600' }],
+        'h2-sm': ['40px', { 'font-family': RECOLETA_ALT_STR, 'font-weight': '600' }],
+        'h3-sm': ['30px', { 'font-family': RECOLETA_ALT_STR, 'font-weight': '600' }],
         'h4-sm': ['25px', { 'font-family': RECOLETA_ALT_STR, 'font-weight': '600' }],
         'h5-sm': ['20px', { 'font-family': RECOLETA_ALT_STR, 'font-weight': '300' }],
         'h6-sm': ['18px', { 'font-family': INTER_STR }],
@@ -65,7 +67,7 @@ export function presetCore(): Preset<Theme> {
         white: '#FFFFFF',
         black: '#000000',
         red: '#FF8361',
-        green: '#92A64E',
+        green: '#A7B264',
       },
     },
 

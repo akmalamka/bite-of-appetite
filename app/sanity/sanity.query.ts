@@ -1,5 +1,5 @@
 import { groq } from '#imports';
-import { PAGE_IMAGE_QUERY } from './image-query';
+import { IMAGE_ASSET_QUERY, PAGE_IMAGE_QUERY } from './image-query';
 
 export const pageQuery = groq`
   *[
@@ -12,6 +12,17 @@ export const pageQuery = groq`
     components[] {
       ...,
       ${PAGE_IMAGE_QUERY}
+    },
+  }
+`;
+
+export const recipesQuery = groq`
+  *[
+    _type == 'recipes'
+  ] {
+    title,
+    image {
+      ${IMAGE_ASSET_QUERY}
     },
   }
 `;

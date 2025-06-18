@@ -1,7 +1,7 @@
-import type { LayoutQueryResult, PageQueryResult } from './sanity.entity';
+import type { LayoutQueryResult, PageQueryResult, RecipesQueryResult } from './sanity.entity';
 
 import { groq, useRoute, useSanityQuery } from '#imports';
-import { pageQuery } from './sanity.query';
+import { pageQuery, recipesQuery } from './sanity.query';
 
 export function useSanityLayoutFetcher() {
   const layoutQuery = groq`
@@ -22,4 +22,8 @@ export function useSanityPage() {
   return useSanityQuery<PageQueryResult>(pageQuery, {
     slug: route.path,
   });
+}
+
+export function useSanityRecipes() {
+  return useSanityQuery<RecipesQueryResult>(recipesQuery);
 }

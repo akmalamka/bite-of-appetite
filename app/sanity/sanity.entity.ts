@@ -15,6 +15,12 @@
 // Source: schema.json
 export type LinkSelection = string;
 
+export type ImageCarousel = {
+  _type: 'imageCarousel';
+  title: string;
+  contentReference: 'recipes' | 'foodForThought';
+};
+
 export type HeroQuote = {
   _type: 'heroQuote';
   quote: string;
@@ -24,7 +30,7 @@ export type HeroQuote = {
 export type HeroImage = {
   _type: 'heroImage';
   title: string;
-  typingTexts: Array<string>;
+  typingTexts?: Array<string>;
   subtitle: string;
   image: {
     asset?: {
@@ -46,33 +52,10 @@ export type HeroImage = {
   };
 };
 
-export type ImageWithAlt = {
-  _type: 'imageWithAlt';
-  asset?: {
-    _ref: string;
-    _type: 'reference';
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-  };
-  media?: unknown;
-  hotspot?: SanityImageHotspot;
-  crop?: SanityImageCrop;
-  alt: string;
-};
-
 export type HeroTitle = {
   _type: 'heroTitle';
   title: string;
   subtitle?: string;
-};
-
-export type Header = {
-  _id: string;
-  _type: 'header';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
 };
 
 export type SocialMedias = {
@@ -87,6 +70,42 @@ export type SocialMedias = {
     _type: 'social';
     _key: string;
   }>;
+};
+
+export type Recipes = {
+  _id: string;
+  _type: 'recipes';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title: string;
+  image: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: 'imageWithAlt';
+  };
+};
+
+export type ImageWithAlt = {
+  _type: 'imageWithAlt';
+  asset?: {
+    _ref: string;
+    _type: 'reference';
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+  };
+  media?: unknown;
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
+  alt: string;
 };
 
 export type LayoutNavigationMenu = {
@@ -127,7 +146,9 @@ export type Pages = {
     _key: string;
   } & HeroImage | {
     _key: string;
-  } & HeroQuote>;
+  } & HeroQuote | {
+    _key: string;
+  } & ImageCarousel>;
 };
 
 export type MediaTag = {
@@ -257,7 +278,7 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type AllSanitySchemaTypes = LinkSelection | HeroQuote | HeroImage | ImageWithAlt | HeroTitle | Header | SocialMedias | LayoutNavigationMenu | Pages | MediaTag | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes = LinkSelection | ImageCarousel | HeroQuote | HeroImage | HeroTitle | SocialMedias | Recipes | ImageWithAlt | LayoutNavigationMenu | Pages | MediaTag | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../sanity/sanity.fetcher.ts
 // Variable: layoutQuery
@@ -303,7 +324,7 @@ export type PageQueryResult = {
     _key: string;
     _type: 'heroImage';
     title: string;
-    typingTexts: Array<string>;
+    typingTexts?: Array<string>;
     subtitle: string;
     image: {
       asset: {
@@ -328,8 +349,26 @@ export type PageQueryResult = {
     _type: 'heroTitle';
     title: string;
     subtitle?: string;
+  } | {
+    _key: string;
+    _type: 'imageCarousel';
+    title: string;
+    contentReference: 'foodForThought' | 'recipes';
   }> | null;
 } | null;
+// Variable: recipesQuery
+// Query: *[    _type == 'recipes'  ] {    title,    image {        asset->{    "dimensions": metadata.dimensions,    "lqip": metadata.lqip,    altText,    "_ref": _id  }    },  }
+export type RecipesQueryResult = Array<{
+  title: string;
+  image: {
+    asset: {
+      dimensions: SanityImageDimensions | null;
+      lqip: string | null;
+      altText: string | null;
+      _ref: string;
+    } | null;
+  };
+}>;
 
 // Query TypeMap
 import '@sanity/client';
@@ -338,5 +377,6 @@ declare module '@sanity/client' {
   interface SanityQueries {
     '\n    {\n      \'socials\': *[_type == \'socialMedias\'][0].socials,\n      \'navigation\': *[\n        _type == \'layoutNavigationMenu\'\n      ] | order(order asc)\n    }\n  ': LayoutQueryResult;
     '\n  *[\n    _type == \'pages\'\n    && url.current == $slug\n  ][0] {\n    title,\n    description,\n    ogImage,\n    components[] {\n      ...,\n      \n  _type == \'heroImage\' => {\n    ...,\n    image {\n      \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n    }\n  },\n\n    },\n  }\n': PageQueryResult;
+    '\n  *[\n    _type == \'recipes\'\n  ] {\n    title,\n    image {\n      \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n    },\n  }\n': RecipesQueryResult;
   }
 }

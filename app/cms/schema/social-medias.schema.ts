@@ -1,3 +1,4 @@
+import { RiFacebookCircleLine } from 'react-icons/ri';
 import { defineArrayMember, defineField, defineType } from 'sanity';
 import { SOCIAL_MEDIAS_SCHEMA } from '../sanity.constant';
 
@@ -5,6 +6,8 @@ export const socialMediasSchema = defineType({
   name: SOCIAL_MEDIAS_SCHEMA,
   title: 'Social Medias',
   type: 'document',
+  icon: RiFacebookCircleLine,
+
   preview: {
     prepare() {
       return {
