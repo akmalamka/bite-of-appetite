@@ -22,8 +22,9 @@ const COMPONENT_ARTICLE_LIST = `
     ...,
     'articles': *[
       _type == 'articles'
-    ] | order(date desc) [0...2] {
+    ] | order(date desc) [0...5] {
       _id,
+      slug,
       title,
       subtitle,
       image {
@@ -31,6 +32,24 @@ const COMPONENT_ARTICLE_LIST = `
       },
     },
     'totalArticles': count(*[_type == 'articles']),
+  }
+`;
+
+const COMPONENT_RECIPE_LIST = `
+  _type == 'recipeList' => {
+    ...,
+    'recipes': *[
+      _type == 'recipes'
+    ] | order(date desc) [0...5] {
+      _id,
+      slug,
+      title,
+      subtitle,
+      image {
+        ${IMAGE_ASSET_QUERY}
+      },
+    },
+    'totalRecipes': count(*[_type == 'recipes']),
   }
 `;
 
@@ -58,6 +77,8 @@ export const pageQuery = groq`
 
       ${COMPONENT_ARTICLE_LIST},
 
+      ${COMPONENT_RECIPE_LIST},
+
       ${COMPONENT_HERO_IMAGE},
 
     },
@@ -67,10 +88,55 @@ export const pageQuery = groq`
 export const paginatedArticlesQuery = groq`
   *[_type == 'articles'] | order(date desc) [$start...$end] {
     _id,
+    slug,
     title,
     subtitle,
     image {
       ${IMAGE_ASSET_QUERY}
+    },
+  }
+`;
+
+export const paginatedRecipesQuery = groq`
+  *[_type == 'recipes'] | order(date desc) [$start...$end] {
+    _id,
+    slug,
+    title,
+    subtitle,
+    image {
+      ${IMAGE_ASSET_QUERY}
+    },
+  }
+`;
+
+export const articleQuery = groq`
+  {
+    'article': *[
+      _type == 'articles'
+      && slug.current == $slug
+    ][0] {
+      _id,
+      title,
+      subtitle,
+      image {
+        ${IMAGE_ASSET_QUERY}
+      },
+    },
+  }
+`;
+
+export const recipeQuery = groq`
+  {
+    'recipe': *[
+      _type == 'recipes'
+      && slug.current == $slug
+    ][0] {
+      _id,
+      title,
+      subtitle,
+      image {
+        ${IMAGE_ASSET_QUERY}
+      },
     },
   }
 `;

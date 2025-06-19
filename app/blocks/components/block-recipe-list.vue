@@ -1,15 +1,15 @@
 <script lang="ts" setup>
 import type { PickPageComponent } from '~/core/core.entity';
-import type { PaginatedArticlesQueryResult } from '~/sanity/sanity.entity';
+import type { PaginatedRecipesQueryResult } from '~/sanity/sanity.entity';
 import { useSanityQuery } from '#imports';
 import { ref, watch } from 'vue';
-import { paginatedArticlesQuery } from '~/sanity/sanity.query';
+import { paginatedRecipesQuery } from '~/sanity/sanity.query';
 
 const { data } = defineProps<{
-  data: PickPageComponent<'articleList'>;
+  data: PickPageComponent<'recipeList'>;
 }>();
 
-const displayedArticles = ref(data.articles || []);
+const displayedRecipes = ref(data.recipes || []);
 
 const currentPage = ref(1);
 
@@ -19,13 +19,13 @@ const ITEMS_PER_PAGE = 5;
 
 const currentOffset = ref(ITEMS_PER_PAGE);
 
-const articleListRef = ref<HTMLElement>();
+const recipeListRef = ref<HTMLElement>();
 
-async function loadArticles() {
+async function loadRecipes() {
   isLoading.value = true;
   try {
-    const { data } = await useSanityQuery<PaginatedArticlesQueryResult>(
-      paginatedArticlesQuery,
+    const { data } = await useSanityQuery<PaginatedRecipesQueryResult>(
+      paginatedRecipesQuery,
       {
         start: currentOffset.value,
         end: currentOffset.value + ITEMS_PER_PAGE,
@@ -33,7 +33,7 @@ async function loadArticles() {
     );
 
     if (data.value) {
-      displayedArticles.value = data.value;
+      displayedRecipes.value = data.value;
       currentOffset.value += ITEMS_PER_PAGE;
     }
   } catch (error: any) {
@@ -45,24 +45,25 @@ async function loadArticles() {
 
 watch(currentPage, async (newPage: number) => {
   currentOffset.value = (newPage - 1) * ITEMS_PER_PAGE;
-  await loadArticles();
+
+  await loadRecipes();
 });
 </script>
 
 <template>
   <CoreLoadingScreen
     v-if="isLoading"
-    ref="articleListRef"
+    ref="recipeListRef"
   />
   <section
     v-else
-    ref="articleListRef"
+    ref="recipeListRef"
     class="flex-vertical-center mb-8 gap-y-4 first:mt-$navbar-height"
   >
     <ul class="flex-vertical-center gap-y-4 container md:gap-y-8">
       <li
-        v-for="(article, index) in displayedArticles"
-        :key="article._id"
+        v-for="(recipe, index) in displayedRecipes"
+        :key="recipe._id"
         class="grid grid-cols-1 items-center justify-center justify-items-center gap-4 md:grid-cols-2 md:gap-8"
       >
         <div
@@ -72,21 +73,21 @@ watch(currentPage, async (newPage: number) => {
             'order-2 md:order-2': index % 2 !== 0,
           }"
         >
-          <h2 class="color-primary text-h3-sm md:text-h3 font-700">
-            {{ article.title }}
+          <h2 class="text-h3-sm color-primary md:text-h3 font-700">
+            {{ recipe.title }}
           </h2>
-          <h3 class="color-primary text-body-medium">
-            {{ article.subtitle }}
+          <h3 class="text-body-medium color-primary">
+            {{ recipe.subtitle }}
           </h3>
           <CoreButton
             variant="filled"
-            :to="`/food-for-thought/${article.slug.current}`"
+            :to="`/recipes/${recipe.slug.current}`"
           >
             Read More
           </CoreButton>
         </div>
         <CoreSanityImage
-          :image="article.image"
+          :image="recipe.image"
           class="size-75% rounded-12px object-cover object-center md:size-85%"
           :class="{
             'order-1 md:order-2': index % 2 === 0,
@@ -98,9 +99,9 @@ watch(currentPage, async (newPage: number) => {
     <CorePagination
       v-model:page="currentPage"
       :disabled="isLoading"
-      :total-items="data.totalArticles"
+      :total-items="data.totalRecipes"
       :items-per-page="ITEMS_PER_PAGE"
-      :top-pagination-ref="articleListRef"
+      :top-pagination-ref="recipeListRef"
     />
   </section>
 </template>

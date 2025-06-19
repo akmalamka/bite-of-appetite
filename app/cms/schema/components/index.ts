@@ -21,4 +21,8 @@ export const componentMembers = [
     name: 'articleList',
     type: 'articleList',
   }),
+  defineArrayMember({
+    name: 'recipeList',
+    type: 'recipeList',
+  }),
 ];
