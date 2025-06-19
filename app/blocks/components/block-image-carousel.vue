@@ -56,6 +56,13 @@ if (!recipes.value) {
         <CoreCarouselPrevious />
         <CoreCarouselNext />
       </CoreCarousel>
+      <CoreButton
+        variant="outlined"
+        class="mt-4 uppercase md:mt-8"
+        :to="data.ctaButton?.ctaLink"
+      >
+        {{ data.ctaButton?.ctaText }}
+      </CoreButton>
     </div>
   </section>
 </template>

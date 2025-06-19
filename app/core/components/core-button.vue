@@ -3,7 +3,7 @@ import { NuxtLink } from '#components';
 
 interface CoreButtonProps {
   to?: string;
-  variant?: 'filled';
+  variant?: 'filled' | 'outlined';
   disabled?: boolean;
   fullWidth?: boolean;
 }
@@ -20,7 +20,7 @@ withDefaults(defineProps<CoreButtonProps>(), {
     :is="to ? NuxtLink : 'button'"
     :to="to"
     :target="to?.startsWith('/') ? undefined : '_blank'"
-    class="w-fit flex items-center gap-2 rounded-full text-center outline-none transition-colors duration-300"
+    class="core-button w-fit flex items-center gap-2 rounded-full text-center outline-none"
     :class="[
       `core-button--${variant}`, {
         'pointer-events-none opacity-50': disabled,
@@ -35,19 +35,13 @@ withDefaults(defineProps<CoreButtonProps>(), {
 
 <style lang="postcss" scoped>
 .core-button {
+  @apply px-4 py-2.5 text-button transition-colors transition-transform duration-280 hover:scale-110;
   &--filled {
-    @apply px-4 py-2.5 bg-green color-white border-transparent border-1 text-button hover:(border-white bg-opacity-90);
-  }
-  &--text {
-    @apply bg-transparent text-eyebrow;
-
-    &:hover .arrow-icon {
-      transform: translateX(8px);
-    }
+    @apply bg-green color-white border-transparent border-1 hover:(border-white);
   }
 
-  &--cta {
-    @apply bg-transparent text-body-links decoration-1 offsetted-underline hover:color-grey-dark;
+  &--outlined {
+    @apply bg-primary-light color-primary border border-2 border-primary hover:(border-primary);
   }
 }
 </style>

@@ -19,6 +19,10 @@ export type ImageCarousel = {
   _type: 'imageCarousel';
   title: string;
   contentReference: 'recipes' | 'foodForThought';
+  ctaButton?: {
+    ctaText: string;
+    ctaLink: LinkSelection;
+  };
 };
 
 export type HeroQuote = {
@@ -354,6 +358,10 @@ export type PageQueryResult = {
     _type: 'imageCarousel';
     title: string;
     contentReference: 'foodForThought' | 'recipes';
+    ctaButton?: {
+      ctaText: string;
+      ctaLink: LinkSelection;
+    };
   }> | null;
 } | null;
 // Variable: recipesQuery

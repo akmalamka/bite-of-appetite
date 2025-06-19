@@ -45,5 +45,25 @@ export const imageCarouselSchema = defineType({
       initialValue: 'recipes',
       validation: (rule) => rule.required().error('Please select a content reference.'),
     }),
+    defineField({
+      name: 'ctaButton',
+      description: 'If this field is left empty, there will be no buttons displayed',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'ctaText',
+          type: 'string',
+          title: 'CTA Text',
+          validation: (rule) => rule.required(),
+        }),
+        defineField({
+          name: 'ctaLink',
+          title: 'CTA Link',
+          type: 'linkSelection',
+          validation: (rule) => rule.required(),
+        }),
+      ],
+      title: 'CTA Button',
+    }),
   ],
 });
