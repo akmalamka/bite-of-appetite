@@ -1,3 +1,5 @@
+import { articlesSchema } from './articles.schema';
+import { articleListSchema } from './components/article-list.schema';
 import { heroImageSchema } from './components/hero-image.schema';
 import { heroQuoteSchema } from './components/hero-quote.schema';
 import { heroTitleSchema } from './components/hero-title.schema';
@@ -13,6 +15,7 @@ export const schemaTypes = [
   pagesSchema,
   navigationMenuSchema,
   recipesSchema,
+  articlesSchema,
   socialMediasSchema,
 
   // Blocks Components
@@ -20,6 +23,7 @@ export const schemaTypes = [
   heroImageSchema,
   heroQuoteSchema,
   imageCarouselSchema,
+  articleListSchema,
 
   // Custom Fields
   linkSelectionSchema,

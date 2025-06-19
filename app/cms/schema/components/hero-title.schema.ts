@@ -1,11 +1,11 @@
-import { RiFlashlightLine } from 'react-icons/ri';
+import { RiHeading } from 'react-icons/ri';
 import { defineField, defineType } from 'sanity';
 
 export const heroTitleSchema = defineType({
   name: 'heroTitle',
   title: 'Hero Title',
   type: 'object',
-  icon: RiFlashlightLine,
+  icon: RiHeading,
 
   preview: {
     select: {
@@ -24,12 +24,6 @@ export const heroTitleSchema = defineType({
       name: 'title',
       type: 'string',
       validation: (rule) => rule.required(),
-    }),
-
-    defineField({
-      name: 'subtitle',
-      description: 'Subtitle will not exist if it is empty',
-      type: 'text',
     }),
   ],
 });

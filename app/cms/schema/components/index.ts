@@ -17,4 +17,8 @@ export const componentMembers = [
     name: 'imageCarousel',
     type: 'imageCarousel',
   }),
+  defineArrayMember({
+    name: 'articleList',
+    type: 'articleList',
+  }),
 ];

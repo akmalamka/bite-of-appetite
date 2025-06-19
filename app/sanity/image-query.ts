@@ -6,12 +6,3 @@ export const IMAGE_ASSET_QUERY = `
     "_ref": _id
   }
 `;
-
-export const PAGE_IMAGE_QUERY = `
-  _type == 'heroImage' => {
-    ...,
-    image {
-      ${IMAGE_ASSET_QUERY}
-    }
-  },
-`;

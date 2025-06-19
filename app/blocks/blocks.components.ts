@@ -1,4 +1,5 @@
 import {
+  LazyBlockArticleList,
   LazyBlockHeroQuote,
   LazyBlockHeroTitle,
   LazyBlockImageCarousel,
@@ -10,6 +11,7 @@ export const BLOCK_COMPONENTS = {
   heroImage: BlockHeroImage,
   heroQuote: LazyBlockHeroQuote,
   imageCarousel: LazyBlockImageCarousel,
+  articleList: LazyBlockArticleList,
 };
 
 export type BlockComponentsKeys = keyof typeof BLOCK_COMPONENTS;

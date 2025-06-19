@@ -7,15 +7,9 @@ defineProps<{
 </script>
 
 <template>
-  <section class="first:mt-$navbar-height">
-    <h1 class="text-h1">
+  <section class="border-b-primary my-4 border-b-2 md:my-8 first:mt-$navbar-height">
+    <h1 class="color-primary text-h3-sm md:text-h3 container">
       {{ data.title }}
     </h1>
-
-    <h2
-      v-if="data.subtitle"
-    >
-      {{ data.subtitle }}
-    </h2>
   </section>
 </template>

@@ -15,6 +15,12 @@
 // Source: schema.json
 export type LinkSelection = string;
 
+export type ArticleList = {
+  _type: 'articleList';
+  title: string;
+  itemsPerPage: number;
+};
+
 export type ImageCarousel = {
   _type: 'imageCarousel';
   title: string;
@@ -59,7 +65,6 @@ export type HeroImage = {
 export type HeroTitle = {
   _type: 'heroTitle';
   title: string;
-  subtitle?: string;
 };
 
 export type SocialMedias = {
@@ -74,6 +79,29 @@ export type SocialMedias = {
     _type: 'social';
     _key: string;
   }>;
+};
+
+export type Articles = {
+  _id: string;
+  _type: 'articles';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title: string;
+  subtitle: string;
+  image: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: 'imageWithAlt';
+  };
 };
 
 export type Recipes = {
@@ -152,7 +180,9 @@ export type Pages = {
     _key: string;
   } & HeroQuote | {
     _key: string;
-  } & ImageCarousel>;
+  } & ImageCarousel | {
+    _key: string;
+  } & ArticleList>;
 };
 
 export type MediaTag = {
@@ -282,7 +312,7 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type AllSanitySchemaTypes = LinkSelection | ImageCarousel | HeroQuote | HeroImage | HeroTitle | SocialMedias | Recipes | ImageWithAlt | LayoutNavigationMenu | Pages | MediaTag | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes = LinkSelection | ArticleList | ImageCarousel | HeroQuote | HeroImage | HeroTitle | SocialMedias | Articles | Recipes | ImageWithAlt | LayoutNavigationMenu | Pages | MediaTag | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../sanity/sanity.fetcher.ts
 // Variable: layoutQuery
@@ -308,7 +338,7 @@ export type LayoutQueryResult = {
 
 // Source: ../sanity/sanity.query.ts
 // Variable: pageQuery
-// Query: *[    _type == 'pages'    && url.current == $slug  ][0] {    title,    description,    ogImage,    components[] {      ...,        _type == 'heroImage' => {    ...,    image {        asset->{    "dimensions": metadata.dimensions,    "lqip": metadata.lqip,    altText,    "_ref": _id  }    }  },    },  }
+// Query: *[    _type == 'pages'    && url.current == $slug  ][0] {    title,    description,    ogImage,    components[] {      ...,        _type == 'imageCarousel' => {    ...,    'recipes': *[      _type == 'recipes'    ] | order(date desc) [0...8] {      _id,      title,      subtitle,      image {          asset->{    "dimensions": metadata.dimensions,    "lqip": metadata.lqip,    altText,    "_ref": _id  }      },    },  },        _type == 'articleList' => {    ...,    'articles': *[      _type == 'articles'    ] | order(date desc) [0...2] {      _id,      title,      subtitle,      image {          asset->{    "dimensions": metadata.dimensions,    "lqip": metadata.lqip,    altText,    "_ref": _id  }      },    },    'totalArticles': count(*[_type == 'articles']),  },        _type == 'heroImage' => {    ...,    image {        asset->{    "dimensions": metadata.dimensions,    "lqip": metadata.lqip,    altText,    "_ref": _id  }    },  },    },  }
 export type PageQueryResult = {
   title: string | null;
   description: string | null;
@@ -325,6 +355,25 @@ export type PageQueryResult = {
     _type: 'image';
   } | null;
   components: Array<{
+    _key: string;
+    _type: 'articleList';
+    title: string;
+    itemsPerPage: number;
+    articles: Array<{
+      _id: string;
+      title: string;
+      subtitle: string;
+      image: {
+        asset: {
+          dimensions: SanityImageDimensions | null;
+          lqip: string | null;
+          altText: string | null;
+          _ref: string;
+        } | null;
+      };
+    }>;
+    totalArticles: number;
+  } | {
     _key: string;
     _type: 'heroImage';
     title: string;
@@ -352,7 +401,6 @@ export type PageQueryResult = {
     _key: string;
     _type: 'heroTitle';
     title: string;
-    subtitle?: string;
   } | {
     _key: string;
     _type: 'imageCarousel';
@@ -362,12 +410,27 @@ export type PageQueryResult = {
       ctaText: string;
       ctaLink: LinkSelection;
     };
+    recipes: Array<{
+      _id: string;
+      title: string;
+      subtitle: null;
+      image: {
+        asset: {
+          dimensions: SanityImageDimensions | null;
+          lqip: string | null;
+          altText: string | null;
+          _ref: string;
+        } | null;
+      };
+    }>;
   }> | null;
 } | null;
-// Variable: recipesQuery
-// Query: *[    _type == 'recipes'  ] {    title,    image {        asset->{    "dimensions": metadata.dimensions,    "lqip": metadata.lqip,    altText,    "_ref": _id  }    },  }
-export type RecipesQueryResult = Array<{
+// Variable: paginatedArticlesQuery
+// Query: *[_type == 'articles'] | order(date desc) [$start...$end] {    _id,    title,    subtitle,    image {        asset->{    "dimensions": metadata.dimensions,    "lqip": metadata.lqip,    altText,    "_ref": _id  }    },  }
+export type PaginatedArticlesQueryResult = Array<{
+  _id: string;
   title: string;
+  subtitle: string;
   image: {
     asset: {
       dimensions: SanityImageDimensions | null;
@@ -384,7 +447,7 @@ import '@sanity/client';
 declare module '@sanity/client' {
   interface SanityQueries {
     '\n    {\n      \'socials\': *[_type == \'socialMedias\'][0].socials,\n      \'navigation\': *[\n        _type == \'layoutNavigationMenu\'\n      ] | order(order asc)\n    }\n  ': LayoutQueryResult;
-    '\n  *[\n    _type == \'pages\'\n    && url.current == $slug\n  ][0] {\n    title,\n    description,\n    ogImage,\n    components[] {\n      ...,\n      \n  _type == \'heroImage\' => {\n    ...,\n    image {\n      \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n    }\n  },\n\n    },\n  }\n': PageQueryResult;
-    '\n  *[\n    _type == \'recipes\'\n  ] {\n    title,\n    image {\n      \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n    },\n  }\n': RecipesQueryResult;
+    '\n  *[\n    _type == \'pages\'\n    && url.current == $slug\n  ][0] {\n    title,\n    description,\n    ogImage,\n    components[] {\n      ...,\n\n      \n  _type == \'imageCarousel\' => {\n    ...,\n    \'recipes\': *[\n      _type == \'recipes\'\n    ] | order(date desc) [0...8] {\n      _id,\n      title,\n      subtitle,\n      image {\n        \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n      },\n    },\n  }\n,\n\n      \n  _type == \'articleList\' => {\n    ...,\n    \'articles\': *[\n      _type == \'articles\'\n    ] | order(date desc) [0...2] {\n      _id,\n      title,\n      subtitle,\n      image {\n        \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n      },\n    },\n    \'totalArticles\': count(*[_type == \'articles\']),\n  }\n,\n\n      \n  _type == \'heroImage\' => {\n    ...,\n    image {\n      \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n    },\n  }\n,\n\n    },\n  }\n': PageQueryResult;
+    '\n  *[_type == \'articles\'] | order(date desc) [$start...$end] {\n    _id,\n    title,\n    subtitle,\n    image {\n      \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n    },\n  }\n': PaginatedArticlesQueryResult;
   }
 }
