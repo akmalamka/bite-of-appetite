@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { PickPageComponent } from '~/core/core.entity';
 import type { PaginatedRecipesQueryResult } from '~/sanity/sanity.entity';
-import { useSanityQuery } from '#imports';
+import { navigateTo, useSanityQuery } from '#imports';
 import { ref, watch } from 'vue';
 import { paginatedRecipesQuery } from '~/sanity/sanity.query';
 
@@ -73,10 +73,10 @@ watch(currentPage, async (newPage: number) => {
             'order-2 md:order-2': index % 2 !== 0,
           }"
         >
-          <h2 class="text-h3-sm color-primary md:text-h3 font-700">
+          <h2 class="color-primary text-h3-sm md:text-h3 font-700">
             {{ recipe.title }}
           </h2>
-          <h3 class="text-body-medium color-primary">
+          <h3 class="color-primary text-body-medium">
             {{ recipe.subtitle }}
           </h3>
           <CoreButton
@@ -88,11 +88,12 @@ watch(currentPage, async (newPage: number) => {
         </div>
         <CoreSanityImage
           :image="recipe.image"
-          class="size-75% rounded-12px object-cover object-center md:size-85%"
+          class="size-75% cursor-pointer rounded-12px object-cover object-center transition-transform duration-280 md:size-85% hover:scale-110"
           :class="{
             'order-1 md:order-2': index % 2 === 0,
             'order-1 md:order-1': index % 2 !== 0,
           }"
+          @click="navigateTo(`/recipes/${recipe.slug.current}`)"
         />
       </li>
     </ul>
