@@ -37,15 +37,35 @@ export const articlesSchema = defineType({
       },
     }),
     defineField({
+      name: 'publishedDate',
+      type: 'date',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: 'subtitle',
       type: 'text',
       validation: (rule) => rule.required(),
     }),
-
     defineField({
       name: 'image',
       title: 'Image',
       type: 'imageWithAlt',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'writingBy',
+      type: 'string',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'photoBy',
+      type: 'string',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'story',
+      type: 'array',
+      of: [{ type: 'block' }],
       validation: (rule) => rule.required(),
     }),
   ],

@@ -87,7 +87,7 @@ watch(currentPage, async (newPage: number) => {
         </div>
         <CoreSanityImage
           :image="article.image"
-          class="size-75% rounded-12px object-cover object-center md:size-85%"
+          class="fluid-max-h-320-480 size-75% grow-0 rounded-12px object-cover object-center md:size-85%"
           :class="{
             'order-1 md:order-2': index % 2 === 0,
             'order-1 md:order-1': index % 2 !== 0,

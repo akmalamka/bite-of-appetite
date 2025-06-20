@@ -9,10 +9,6 @@ defineProps<{
 <template>
   <section
     class="grid grid-cols-1 md:grid-cols-2"
-    :class="{
-      'block-hero-image-left': data.imagePosition === 'left',
-      'block-hero-image-right': data.imagePosition === 'right',
-    }"
   >
     <CoreSanityImage
       :image="data.image!"
@@ -45,7 +41,7 @@ defineProps<{
           />
         </h1>
         <h2
-          class="w text-body-medium"
+          class="text-body-medium w"
           :class="{
             'w-1/2': data.imagePosition === 'left',
             'w-full': data.imagePosition === 'right',

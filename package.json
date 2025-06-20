@@ -21,6 +21,7 @@
     "deploy:production": "firebase deploy --only functions:server_production,hosting:prodution"
   },
   "dependencies": {
+    "@internationalized/date": "^3.8.2",
     "@nuxt/image": "^1.10.0",
     "@nuxtjs/sanity": "^1.13.3",
     "@portabletext/vue": "^1.0.12",

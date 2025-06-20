@@ -117,10 +117,14 @@ export const articleQuery = groq`
     ][0] {
       _id,
       title,
+      publishedDate,
       subtitle,
       image {
         ${IMAGE_ASSET_QUERY}
       },
+      writingBy,
+      photoBy,
+      story,
     },
   }
 `;
