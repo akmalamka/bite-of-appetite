@@ -1,12 +1,24 @@
 <script lang="ts" setup>
 import { PortableText, type PortableTextProps, type PortableTextVueComponents } from '@portabletext/vue';
-import { h, useAttrs, type VNode } from 'vue';
+import { computed, h, useAttrs, type VNode } from 'vue';
 
-defineProps<PortableTextProps>();
+const { textSize } = withDefaults(defineProps<PortableTextProps & {
+  textSize?: 'large' | 'medium' | 'small';
+}>(), {
+  textSize: 'large',
+});
 
 const attrs = useAttrs();
 
-const TEXT_STYLE = 'text-body-large-sm md:text-body-large';
+const TEXT_STYLE = computed(() => {
+  if (textSize === 'large') {
+    return 'text-body-large-sm md:text-body-large';
+  } else if (textSize === 'medium') {
+    return 'text-body-medium-sm md:text-body-medium';
+  } else {
+    return 'text-body-small-sm md:text-body-small';
+  }
+});
 
 const components: Partial<PortableTextVueComponents> = {
   block: {

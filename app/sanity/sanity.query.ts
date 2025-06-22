@@ -22,7 +22,7 @@ const COMPONENT_ARTICLE_LIST = `
     ...,
     'articles': *[
       _type == 'articles'
-    ] | order(date desc) [0...5] {
+    ] | order(publishedDate desc) [0...5] {
       _id,
       slug,
       title,
@@ -40,11 +40,15 @@ const COMPONENT_RECIPE_LIST = `
     ...,
     'recipes': *[
       _type == 'recipes'
-    ] | order(date desc) [0...5] {
+    ] | order(publishedDate desc) [0...5] {
       _id,
       slug,
       title,
       subtitle,
+      categories[]-> {
+        _id,
+        title,
+      },
       image {
         ${IMAGE_ASSET_QUERY}
       },
@@ -86,7 +90,7 @@ export const pageQuery = groq`
 `;
 
 export const paginatedArticlesQuery = groq`
-  *[_type == 'articles'] | order(date desc) [$start...$end] {
+  *[_type == 'articles'] | order(publishedDate desc) [$start...$end] {
     _id,
     slug,
     title,
@@ -98,11 +102,15 @@ export const paginatedArticlesQuery = groq`
 `;
 
 export const paginatedRecipesQuery = groq`
-  *[_type == 'recipes'] | order(date desc) [$start...$end] {
+  *[_type == 'recipes'] | order(publishedDate desc) [$start...$end] {
     _id,
     slug,
     title,
     subtitle,
+    categories[]-> {
+      _id,
+      title,
+    },
     image {
       ${IMAGE_ASSET_QUERY}
     },
@@ -137,10 +145,21 @@ export const recipeQuery = groq`
     ][0] {
       _id,
       title,
+      publishedDate,
       subtitle,
+      categories[]-> {
+        _id,
+        title,
+      },
       image {
         ${IMAGE_ASSET_QUERY}
       },
+      time,
+      recipeBy,
+      inspiredBy,
+      foodPhotographyBy,
+      foodStylingBy,
+      story,
     },
   }
 `;

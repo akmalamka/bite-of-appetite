@@ -6,7 +6,6 @@ export const heroQuoteSchema = defineType({
   title: 'Hero Quote',
   type: 'object',
   icon: RiChat1Line,
-
   preview: {
     select: {
       author: 'author',
@@ -18,7 +17,6 @@ export const heroQuoteSchema = defineType({
       };
     },
   },
-
   fields: [
     defineField({
       name: 'quote',

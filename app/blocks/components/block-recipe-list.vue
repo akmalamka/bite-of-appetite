@@ -73,22 +73,30 @@ watch(currentPage, async (newPage: number) => {
             'order-2 md:order-2': index % 2 !== 0,
           }"
         >
-          <h2 class="color-primary text-h3-sm md:text-h3 font-700">
+          <div class="flex gap-2">
+            <CoreChip
+              v-for="category in recipe.categories"
+              :key="category._id"
+            >
+              {{ category.title }}
+            </CoreChip>
+          </div>
+          <h2 class="text-h3-sm color-primary md:text-h3 font-700">
             {{ recipe.title }}
           </h2>
-          <h3 class="color-primary text-body-medium">
+          <h3 class="text-body-medium color-primary">
             {{ recipe.subtitle }}
           </h3>
           <CoreButton
             variant="filled"
             :to="`/recipes/${recipe.slug.current}`"
           >
-            Read More
+            See Recipe
           </CoreButton>
         </div>
         <CoreSanityImage
           :image="recipe.image"
-          class="size-75% cursor-pointer rounded-12px object-cover object-center transition-transform duration-280 md:size-85% hover:scale-110"
+          class="size-75% cursor-pointer rounded-12px object-cover object-center transition-transform duration-280 md:size-85% hover:scale-105"
           :class="{
             'order-1 md:order-2': index % 2 === 0,
             'order-1 md:order-1': index % 2 !== 0,

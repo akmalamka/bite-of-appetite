@@ -72,7 +72,7 @@ watch(currentPage, async (newPage: number) => {
             'order-2 md:order-2': index % 2 !== 0,
           }"
         >
-          <h2 class="text-h3-sm color-primary md:text-h3 font-700">
+          <h2 class="color-primary text-h3-sm md:text-h3 font-700">
             {{ article.title }}
           </h2>
           <h3 class="text-body-medium color-primary">
@@ -87,7 +87,7 @@ watch(currentPage, async (newPage: number) => {
         </div>
         <CoreSanityImage
           :image="article.image"
-          class="fluid-max-h-320-480 size-75% grow-0 cursor-pointer rounded-12px object-cover object-center transition-transform duration-280 md:size-85% hover:scale-110"
+          class="fluid-max-h-320-480 size-75% grow-0 cursor-pointer rounded-12px object-cover object-center transition-transform duration-280 md:size-85% hover:scale-105"
           :class="{
             'order-1 md:order-2': index % 2 === 0,
             'order-1 md:order-1': index % 2 !== 0,
