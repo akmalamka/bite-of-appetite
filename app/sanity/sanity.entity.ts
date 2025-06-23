@@ -66,11 +66,6 @@ export type HeroImage = {
   };
 };
 
-export type HeroTitle = {
-  _type: 'heroTitle';
-  title: string;
-};
-
 export type SocialMedias = {
   _id: string;
   _type: 'socialMedias';
@@ -302,8 +297,6 @@ export type Pages = {
   };
   components?: Array<{
     _key: string;
-  } & HeroTitle | {
-    _key: string;
   } & HeroImage | {
     _key: string;
   } & HeroQuote | {
@@ -442,7 +435,7 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type AllSanitySchemaTypes = LinkSelection | RecipeList | ArticleList | ImageCarousel | HeroQuote | HeroImage | HeroTitle | SocialMedias | Categories | CategoryGroups | Articles | Recipes | ImageWithAlt | LayoutNavigationMenu | Pages | MediaTag | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes = LinkSelection | RecipeList | ArticleList | ImageCarousel | HeroQuote | HeroImage | SocialMedias | Categories | CategoryGroups | Articles | Recipes | ImageWithAlt | LayoutNavigationMenu | Pages | MediaTag | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../sanity/sanity.fetcher.ts
 // Variable: layoutQuery
@@ -468,7 +461,7 @@ export type LayoutQueryResult = {
 
 // Source: ../sanity/sanity.query.ts
 // Variable: pageQuery
-// Query: *[    _type == 'pages'    && url.current == $slug  ][0] {    title,    description,    ogImage,    components[] {      ...,        _type == 'imageCarousel' => {    ...,    'recipes': *[      _type == 'recipes'    ] | order(date desc) [0...8] {      _id,      title,      subtitle,      image {          asset->{    "dimensions": metadata.dimensions,    "lqip": metadata.lqip,    altText,    "_ref": _id  }      },    },  },        _type == 'articleList' => {    ...,    'articles': *[      _type == 'articles'    ] | order(publishedDate desc) [0...5] {      _id,      slug,      title,      subtitle,      image {          asset->{    "dimensions": metadata.dimensions,    "lqip": metadata.lqip,    altText,    "_ref": _id  }      },    },    'totalArticles': count(*[_type == 'articles']),  },        _type == 'recipeList' => {    ...,    'recipes': *[      _type == 'recipes'    ] | order(publishedDate desc) [0...5] {      _id,      slug,      title,      subtitle,      categories[]-> {        _id,        title,      },      image {          asset->{    "dimensions": metadata.dimensions,    "lqip": metadata.lqip,    altText,    "_ref": _id  }      },    },    'totalRecipes': count(*[_type == 'recipes']),  },        _type == 'heroImage' => {    ...,    image {        asset->{    "dimensions": metadata.dimensions,    "lqip": metadata.lqip,    altText,    "_ref": _id  }    },  },    },  }
+// Query: *[    _type == 'pages'    && url.current == $slug  ][0] {    title,    description,    ogImage,    components[] {      ...,        _type == 'imageCarousel' => {    ...,    'recipes': *[      _type == 'recipes'    ] | order(date desc) [0...8] {      _id,      title,      subtitle,      image {          asset->{    "dimensions": metadata.dimensions,    "lqip": metadata.lqip,    altText,    "_ref": _id  }      },    },  },        _type == 'articleList' => {    ...,    'articles': *[      _type == 'articles'    ] | order(publishedDate desc) [0...5] {      _id,      slug,      title,      subtitle,      image {          asset->{    "dimensions": metadata.dimensions,    "lqip": metadata.lqip,    altText,    "_ref": _id  }      },    },    'totalArticles': count(*[_type == 'articles']),  },        _type == 'recipeList' => {    ...,    'recipes': *[      _type == 'recipes'    ] | order(publishedDate desc) [] {      _id,      slug,      title,      subtitle,      categories[]-> {        _id,        title,      },      image {          asset->{    "dimensions": metadata.dimensions,    "lqip": metadata.lqip,    altText,    "_ref": _id  }      },    },    'totalRecipes': count(*[_type == 'recipes']),  },        _type == 'heroImage' => {    ...,    image {        asset->{    "dimensions": metadata.dimensions,    "lqip": metadata.lqip,    altText,    "_ref": _id  }    },  },    },  }
 export type PageQueryResult = {
   title: string | null;
   description: string | null;
@@ -527,10 +520,6 @@ export type PageQueryResult = {
     _type: 'heroQuote';
     quote: string;
     author?: string;
-  } | {
-    _key: string;
-    _type: 'heroTitle';
-    title: string;
   } | {
     _key: string;
     _type: 'imageCarousel';
@@ -594,26 +583,6 @@ export type PaginatedArticlesQueryResult = Array<{
     } | null;
   };
 }>;
-// Variable: paginatedRecipesQuery
-// Query: *[_type == 'recipes'] | order(publishedDate desc) [$start...$end] {    _id,    slug,    title,    subtitle,    categories[]-> {      _id,      title,    },    image {        asset->{    "dimensions": metadata.dimensions,    "lqip": metadata.lqip,    altText,    "_ref": _id  }    },  }
-export type PaginatedRecipesQueryResult = Array<{
-  _id: string;
-  slug: Slug;
-  title: string;
-  subtitle: string;
-  categories: Array<{
-    _id: string;
-    title: string;
-  }>;
-  image: {
-    asset: {
-      dimensions: SanityImageDimensions | null;
-      lqip: string | null;
-      altText: string | null;
-      _ref: string;
-    } | null;
-  };
-}>;
 // Variable: articleQuery
 // Query: {    'article': *[      _type == 'articles'      && slug.current == $slug    ][0] {      _id,      title,      publishedDate,      subtitle,      image {          asset->{    "dimensions": metadata.dimensions,    "lqip": metadata.lqip,    altText,    "_ref": _id  }      },      writingBy,      photoBy,      story,    },  }
 export type ArticleQueryResult = {
@@ -653,7 +622,7 @@ export type ArticleQueryResult = {
   } | null;
 };
 // Variable: recipeQuery
-// Query: {    'recipe': *[      _type == 'recipes'      && slug.current == $slug    ][0] {      _id,      title,      publishedDate,      subtitle,      categories[]-> {        _id,        title,      },      image {          asset->{    "dimensions": metadata.dimensions,    "lqip": metadata.lqip,    altText,    "_ref": _id  }      },      time,      recipeBy,      inspiredBy,      foodPhotographyBy,      foodStylingBy,      servings,      story,      isIngredientWithComponent,      ingredientsWithComponent,      ingredientsWithoutComponent,      directions,    },  }
+// Query: {    'recipe': *[      _type == 'recipes'      && slug.current == $slug    ][0] {      _id,      title,      publishedDate,      subtitle,      categories[]-> {        _id,        title,      },      image {          asset->{    "dimensions": metadata.dimensions,    "lqip": metadata.lqip,    altText,    "_ref": _id  }      },      time,      recipeBy,      inspiredBy,      foodPhotographyBy,      foodStylingBy,      servings,      story,      isIngredientWithComponent,      ingredientsWithComponent,      ingredientsWithoutComponent,      directions,      'nextRecipes': *[        _type == 'recipes' &&        slug.current != $slug      ] [0...6] {        _id,        slug,        title,        subtitle,        categories[]-> {          _id,          title,        },        image {            asset->{    "dimensions": metadata.dimensions,    "lqip": metadata.lqip,    altText,    "_ref": _id  }        },      }    },  }
 export type RecipeQueryResult = {
   recipe: {
     _id: string;
@@ -740,6 +709,24 @@ export type RecipeQueryResult = {
       _type: 'direction';
       _key: string;
     }>;
+    nextRecipes: Array<{
+      _id: string;
+      slug: Slug;
+      title: string;
+      subtitle: string;
+      categories: Array<{
+        _id: string;
+        title: string;
+      }>;
+      image: {
+        asset: {
+          dimensions: SanityImageDimensions | null;
+          lqip: string | null;
+          altText: string | null;
+          _ref: string;
+        } | null;
+      };
+    }>;
   } | null;
 };
 
@@ -749,10 +736,9 @@ import '@sanity/client';
 declare module '@sanity/client' {
   interface SanityQueries {
     '\n    {\n      \'socials\': *[_type == \'socialMedias\'][0].socials,\n      \'navigation\': *[\n        _type == \'layoutNavigationMenu\'\n      ] | order(order asc)\n    }\n  ': LayoutQueryResult;
-    '\n  *[\n    _type == \'pages\'\n    && url.current == $slug\n  ][0] {\n    title,\n    description,\n    ogImage,\n    components[] {\n      ...,\n\n      \n  _type == \'imageCarousel\' => {\n    ...,\n    \'recipes\': *[\n      _type == \'recipes\'\n    ] | order(date desc) [0...8] {\n      _id,\n      title,\n      subtitle,\n      image {\n        \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n      },\n    },\n  }\n,\n\n      \n  _type == \'articleList\' => {\n    ...,\n    \'articles\': *[\n      _type == \'articles\'\n    ] | order(publishedDate desc) [0...5] {\n      _id,\n      slug,\n      title,\n      subtitle,\n      image {\n        \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n      },\n    },\n    \'totalArticles\': count(*[_type == \'articles\']),\n  }\n,\n\n      \n  _type == \'recipeList\' => {\n    ...,\n    \'recipes\': *[\n      _type == \'recipes\'\n    ] | order(publishedDate desc) [0...5] {\n      _id,\n      slug,\n      title,\n      subtitle,\n      categories[]-> {\n        _id,\n        title,\n      },\n      image {\n        \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n      },\n    },\n    \'totalRecipes\': count(*[_type == \'recipes\']),\n  }\n,\n\n      \n  _type == \'heroImage\' => {\n    ...,\n    image {\n      \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n    },\n  }\n,\n\n    },\n  }\n': PageQueryResult;
+    '\n  *[\n    _type == \'pages\'\n    && url.current == $slug\n  ][0] {\n    title,\n    description,\n    ogImage,\n    components[] {\n      ...,\n\n      \n  _type == \'imageCarousel\' => {\n    ...,\n    \'recipes\': *[\n      _type == \'recipes\'\n    ] | order(date desc) [0...8] {\n      _id,\n      title,\n      subtitle,\n      image {\n        \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n      },\n    },\n  }\n,\n\n      \n  _type == \'articleList\' => {\n    ...,\n    \'articles\': *[\n      _type == \'articles\'\n    ] | order(publishedDate desc) [0...5] {\n      _id,\n      slug,\n      title,\n      subtitle,\n      image {\n        \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n      },\n    },\n    \'totalArticles\': count(*[_type == \'articles\']),\n  }\n,\n\n      \n  _type == \'recipeList\' => {\n    ...,\n    \'recipes\': *[\n      _type == \'recipes\'\n    ] | order(publishedDate desc) [] {\n      _id,\n      slug,\n      title,\n      subtitle,\n      categories[]-> {\n        _id,\n        title,\n      },\n      image {\n        \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n      },\n    },\n    \'totalRecipes\': count(*[_type == \'recipes\']),\n  }\n,\n\n      \n  _type == \'heroImage\' => {\n    ...,\n    image {\n      \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n    },\n  }\n,\n\n    },\n  }\n': PageQueryResult;
     '\n  *[_type == \'articles\'] | order(publishedDate desc) [$start...$end] {\n    _id,\n    slug,\n    title,\n    subtitle,\n    image {\n      \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n    },\n  }\n': PaginatedArticlesQueryResult;
-    '\n  *[_type == \'recipes\'] | order(publishedDate desc) [$start...$end] {\n    _id,\n    slug,\n    title,\n    subtitle,\n    categories[]-> {\n      _id,\n      title,\n    },\n    image {\n      \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n    },\n  }\n': PaginatedRecipesQueryResult;
     '\n  {\n    \'article\': *[\n      _type == \'articles\'\n      && slug.current == $slug\n    ][0] {\n      _id,\n      title,\n      publishedDate,\n      subtitle,\n      image {\n        \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n      },\n      writingBy,\n      photoBy,\n      story,\n    },\n  }\n': ArticleQueryResult;
-    '\n  {\n    \'recipe\': *[\n      _type == \'recipes\'\n      && slug.current == $slug\n    ][0] {\n      _id,\n      title,\n      publishedDate,\n      subtitle,\n      categories[]-> {\n        _id,\n        title,\n      },\n      image {\n        \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n      },\n      time,\n      recipeBy,\n      inspiredBy,\n      foodPhotographyBy,\n      foodStylingBy,\n      servings,\n      story,\n      isIngredientWithComponent,\n      ingredientsWithComponent,\n      ingredientsWithoutComponent,\n      directions,\n    },\n  }\n': RecipeQueryResult;
+    '\n  {\n    \'recipe\': *[\n      _type == \'recipes\'\n      && slug.current == $slug\n    ][0] {\n      _id,\n      title,\n      publishedDate,\n      subtitle,\n      categories[]-> {\n        _id,\n        title,\n      },\n      image {\n        \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n      },\n      time,\n      recipeBy,\n      inspiredBy,\n      foodPhotographyBy,\n      foodStylingBy,\n      servings,\n      story,\n      isIngredientWithComponent,\n      ingredientsWithComponent,\n      ingredientsWithoutComponent,\n      directions,\n      \'nextRecipes\': *[\n        _type == \'recipes\' &&\n        slug.current != $slug\n      ] [0...6] {\n        _id,\n        slug,\n        title,\n        subtitle,\n        categories[]-> {\n          _id,\n          title,\n        },\n        image {\n          \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n        },\n      }\n    },\n  }\n': RecipeQueryResult;
   }
 }

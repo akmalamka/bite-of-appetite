@@ -36,7 +36,7 @@ const { formatDate } = useDateFormatter();
         <h1 class="text-h4-sm md:text-h4 text-center">
           {{ data?.recipe?.title }}
         </h1>
-        <h2 class="text-sh1-sm md:text-sh1 text-center">
+        <h2 class="md:text-sh2 text-sh2-sm text-center">
           {{ data?.recipe?.subtitle }}
         </h2>
         <h3 class="text-body-medium text-center">
@@ -45,7 +45,8 @@ const { formatDate } = useDateFormatter();
         <h4 class="text-body-small text-center italic">
           {{
             data?.recipe?.foodPhotographyBy === data?.recipe?.foodStylingBy
-              ? `Food Photography and Food Styling by ${data?.recipe?.foodPhotographyBy}` : `Food Photography by ${data?.recipe?.foodPhotographyBy} and Food Styling by ${data?.recipe?.foodStylingBy}` }}
+              ? `Food Photography and Food Styling by ${data?.recipe?.foodPhotographyBy}`
+              : `Food Photography by ${data?.recipe?.foodPhotographyBy} and Food Styling by ${data?.recipe?.foodStylingBy}` }}
         </h4>
         <div class="flex-vertical-center gap-y-4 md:gap-y-8">
           <div class="flex justify-between text-center">
@@ -105,7 +106,7 @@ const { formatDate } = useDateFormatter();
             <span class="text-h6-sm md:text-h6 grow">
               Ingredients
             </span>
-            <span class="grow-0">
+            <span class="text-body-xs grow-0 uppercase">
               Serves {{ data?.recipe?.servings }}
             </span>
           </div>
@@ -152,5 +153,19 @@ const { formatDate } = useDateFormatter();
         />
       </div>
     </div>
+    <BlockImageCarousel
+      :data="{
+        _key: 'Try Another Recipes',
+        _type: 'imageCarousel',
+        title: 'Try Another Recipes',
+        contentReference: 'recipes',
+        ctaButton: {
+          ctaText: 'View More Recipes',
+          ctaLink: '/recipes',
+        },
+        recipes: data?.recipe?.nextRecipes!,
+      }"
+      class="col-span-1 md:col-span-2"
+    />
   </article>
 </template>

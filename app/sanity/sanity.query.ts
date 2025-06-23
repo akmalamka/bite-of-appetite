@@ -40,7 +40,7 @@ const COMPONENT_RECIPE_LIST = `
     ...,
     'recipes': *[
       _type == 'recipes'
-    ] | order(publishedDate desc) [0...5] {
+    ] | order(publishedDate desc) [] {
       _id,
       slug,
       title,
@@ -101,22 +101,6 @@ export const paginatedArticlesQuery = groq`
   }
 `;
 
-export const paginatedRecipesQuery = groq`
-  *[_type == 'recipes'] | order(publishedDate desc) [$start...$end] {
-    _id,
-    slug,
-    title,
-    subtitle,
-    categories[]-> {
-      _id,
-      title,
-    },
-    image {
-      ${IMAGE_ASSET_QUERY}
-    },
-  }
-`;
-
 export const articleQuery = groq`
   {
     'article': *[
@@ -165,6 +149,22 @@ export const recipeQuery = groq`
       ingredientsWithComponent,
       ingredientsWithoutComponent,
       directions,
+      'nextRecipes': *[
+        _type == 'recipes' &&
+        slug.current != $slug
+      ] [0...6] {
+        _id,
+        slug,
+        title,
+        subtitle,
+        categories[]-> {
+          _id,
+          title,
+        },
+        image {
+          ${IMAGE_ASSET_QUERY}
+        },
+      }
     },
   }
 `;

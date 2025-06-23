@@ -34,10 +34,12 @@ export function presetCore(): Preset<Theme> {
         'h4-accent': ['30px', { 'font-family': YOURNOTES_STR, 'font-weight': '400' }],
         'h5': ['24px', { 'font-family': RECOLETA_ALT_STR, 'font-weight': '300' }],
         'h6': ['20px', { 'font-family': RECOLETA_ALT_STR, 'font-weight': '600' }],
-        'sh1': ['20px', { 'font-family': INTER_STR }],
+        'sh1': ['24px', { 'font-family': INTER_STR }],
+        'sh2': ['20px', { 'font-family': INTER_STR }],
         'body-large': ['18px', { 'line-height': '28px', 'font-family': INTER_STR }],
         'body-medium': ['16px', { 'line-height': '28px', 'font-family': INTER_STR }],
         'body-small': ['14px', { 'font-family': INTER_STR }],
+        'body-xs': ['12px', { 'font-family': INTER_STR }],
         'button': ['14px', { 'text-transform': 'uppercase', 'font-family': INTER_STR }],
 
         // Mobile
@@ -48,7 +50,8 @@ export function presetCore(): Preset<Theme> {
         'h4-sm': ['25px', { 'font-family': RECOLETA_ALT_STR, 'font-weight': '600' }],
         'h5-sm': ['20px', { 'font-family': RECOLETA_ALT_STR, 'font-weight': '300' }],
         'h6-sm': ['18px', { 'font-family': INTER_STR }],
-        'sh1-sm': ['18px', { 'font-family': INTER_STR }],
+        'sh1-sm': ['20px', { 'font-family': INTER_STR }],
+        'sh2-sm': ['18px', { 'font-family': INTER_STR }],
         'body-large-sm': ['16px', { 'font-family': INTER_STR }],
       },
 

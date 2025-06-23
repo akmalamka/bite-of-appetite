@@ -40,7 +40,7 @@ defineProps<{
             <span>
               {{ ingredient.name }}
             </span>
-            <span>
+            <span class="text-end">
               {{ ingredient.measurement }} {{ ingredient.unit }}
             </span>
           </div>

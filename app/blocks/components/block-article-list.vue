@@ -59,6 +59,8 @@ watch(currentPage, async (newPage: number) => {
     ref="articleListRef"
     class="flex-vertical-center mb-8 gap-y-4 first:mt-$navbar-height"
   >
+    <CoreHeroTitle :title=" data.title" />
+
     <ul class="flex-vertical-center gap-y-4 container md:gap-y-8">
       <li
         v-for="(article, index) in displayedArticles"
@@ -75,7 +77,7 @@ watch(currentPage, async (newPage: number) => {
           <h2 class="color-primary text-h3-sm md:text-h3 font-700">
             {{ article.title }}
           </h2>
-          <h3 class="text-body-medium color-primary">
+          <h3 class="color-primary text-body-medium">
             {{ article.subtitle }}
           </h3>
           <CoreButton
