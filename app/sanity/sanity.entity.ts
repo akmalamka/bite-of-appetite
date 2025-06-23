@@ -206,7 +206,7 @@ export type Recipes = {
   }>;
   foodPhotographyBy: string;
   foodStylingBy: string;
-  story: Array<{
+  story?: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -222,6 +222,34 @@ export type Recipes = {
     }>;
     level?: number;
     _type: 'block';
+    _key: string;
+  }>;
+  isIngredientWithComponent?: boolean;
+  servings: string;
+  ingredientsWithComponent?: Array<{
+    title: string;
+    ingredients: Array<{
+      name: string;
+      measurement?: string;
+      unit?: string;
+      _type: 'ingredient';
+      _key: string;
+    }>;
+    _type: 'component';
+    _key: string;
+  }>;
+  ingredientsWithoutComponent?: Array<{
+    name: string;
+    measurement?: string;
+    unit?: string;
+    _type: 'ingredient';
+    _key: string;
+  }>;
+  directions: Array<{
+    title: string;
+    step: string;
+    tips?: string;
+    _type: 'direction';
     _key: string;
   }>;
 };
@@ -625,7 +653,7 @@ export type ArticleQueryResult = {
   } | null;
 };
 // Variable: recipeQuery
-// Query: {    'recipe': *[      _type == 'recipes'      && slug.current == $slug    ][0] {      _id,      title,      publishedDate,      subtitle,      categories[]-> {        _id,        title,      },      image {          asset->{    "dimensions": metadata.dimensions,    "lqip": metadata.lqip,    altText,    "_ref": _id  }      },      time,      recipeBy,      inspiredBy,      foodPhotographyBy,      foodStylingBy,      story,    },  }
+// Query: {    'recipe': *[      _type == 'recipes'      && slug.current == $slug    ][0] {      _id,      title,      publishedDate,      subtitle,      categories[]-> {        _id,        title,      },      image {          asset->{    "dimensions": metadata.dimensions,    "lqip": metadata.lqip,    altText,    "_ref": _id  }      },      time,      recipeBy,      inspiredBy,      foodPhotographyBy,      foodStylingBy,      servings,      story,      isIngredientWithComponent,      ingredientsWithComponent,      ingredientsWithoutComponent,      directions,    },  }
 export type RecipeQueryResult = {
   recipe: {
     _id: string;
@@ -666,6 +694,7 @@ export type RecipeQueryResult = {
     }> | null;
     foodPhotographyBy: string;
     foodStylingBy: string;
+    servings: string;
     story: Array<{
       children?: Array<{
         marks?: Array<string>;
@@ -683,6 +712,33 @@ export type RecipeQueryResult = {
       level?: number;
       _type: 'block';
       _key: string;
+    }> | null;
+    isIngredientWithComponent: boolean | null;
+    ingredientsWithComponent: Array<{
+      title: string;
+      ingredients: Array<{
+        name: string;
+        measurement?: string;
+        unit?: string;
+        _type: 'ingredient';
+        _key: string;
+      }>;
+      _type: 'component';
+      _key: string;
+    }> | null;
+    ingredientsWithoutComponent: Array<{
+      name: string;
+      measurement?: string;
+      unit?: string;
+      _type: 'ingredient';
+      _key: string;
+    }> | null;
+    directions: Array<{
+      title: string;
+      step: string;
+      tips?: string;
+      _type: 'direction';
+      _key: string;
     }>;
   } | null;
 };
@@ -697,6 +753,6 @@ declare module '@sanity/client' {
     '\n  *[_type == \'articles\'] | order(publishedDate desc) [$start...$end] {\n    _id,\n    slug,\n    title,\n    subtitle,\n    image {\n      \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n    },\n  }\n': PaginatedArticlesQueryResult;
     '\n  *[_type == \'recipes\'] | order(publishedDate desc) [$start...$end] {\n    _id,\n    slug,\n    title,\n    subtitle,\n    categories[]-> {\n      _id,\n      title,\n    },\n    image {\n      \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n    },\n  }\n': PaginatedRecipesQueryResult;
     '\n  {\n    \'article\': *[\n      _type == \'articles\'\n      && slug.current == $slug\n    ][0] {\n      _id,\n      title,\n      publishedDate,\n      subtitle,\n      image {\n        \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n      },\n      writingBy,\n      photoBy,\n      story,\n    },\n  }\n': ArticleQueryResult;
-    '\n  {\n    \'recipe\': *[\n      _type == \'recipes\'\n      && slug.current == $slug\n    ][0] {\n      _id,\n      title,\n      publishedDate,\n      subtitle,\n      categories[]-> {\n        _id,\n        title,\n      },\n      image {\n        \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n      },\n      time,\n      recipeBy,\n      inspiredBy,\n      foodPhotographyBy,\n      foodStylingBy,\n      story,\n    },\n  }\n': RecipeQueryResult;
+    '\n  {\n    \'recipe\': *[\n      _type == \'recipes\'\n      && slug.current == $slug\n    ][0] {\n      _id,\n      title,\n      publishedDate,\n      subtitle,\n      categories[]-> {\n        _id,\n        title,\n      },\n      image {\n        \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n      },\n      time,\n      recipeBy,\n      inspiredBy,\n      foodPhotographyBy,\n      foodStylingBy,\n      servings,\n      story,\n      isIngredientWithComponent,\n      ingredientsWithComponent,\n      ingredientsWithoutComponent,\n      directions,\n    },\n  }\n': RecipeQueryResult;
   }
 }

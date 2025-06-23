@@ -23,7 +23,7 @@ defineProps<{
             v-if="error.statusCode === 404"
             class="text-h4-sm md:text-h4 md:(max-w-110)"
           >
-            Oops! Looks like you followed <span class="text-h4-accent"> a bad link.</span>
+            Oops! Looks like you followed <span class="text-h4-accent-sm md:text-h4-accent"> a bad link.</span>
           </p>
           <!-- this is for internal display, to help debugging non-404 errors -->
           <div

@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { CoreIngredientsAccordion } from '#components';
 import { showError } from '#imports';
 import { Separator } from 'radix-vue';
 import { useDateFormatter } from '~/core/composables/use-date-formatter';
@@ -18,8 +19,9 @@ const { formatDate } = useDateFormatter();
 
 <template>
   <article
-    class="grid grid-cols-1 md:grid-cols-2"
+    class="grid grid-cols-1 mb-8 gap-4 md:grid-cols-2 md:mb-12"
   >
+    <!-- Image and General Description -->
     <CoreSanityImage
       :image="data?.recipe?.image"
       class="col-span-1 h-75dvh object-cover object-center md:(size-full max-h-full)"
@@ -34,6 +36,9 @@ const { formatDate } = useDateFormatter();
         <h1 class="text-h4-sm md:text-h4 text-center">
           {{ data?.recipe?.title }}
         </h1>
+        <h2 class="text-sh1-sm md:text-sh1 text-center">
+          {{ data?.recipe?.subtitle }}
+        </h2>
         <h3 class="text-body-medium text-center">
           Time needed: {{ data?.recipe?.time }}
         </h3>
@@ -72,20 +77,80 @@ const { formatDate } = useDateFormatter();
         </div>
       </div>
     </div>
-    <div class="flex-vertical-center color-primary col-span-1 my-4 gap-y-4 container md:(col-span-2 my-8 gap-y-8)">
+
+    <!-- Story -->
+    <div
+      v-if="data?.recipe?.story"
+      class="flex-vertical-center color-primary col-span-1 my-4 gap-y-4 container md:(col-span-2 my-8 gap-y-8)"
+    >
       <Separator
-        class="bg-primary my-[15px] data-[orientation=horizontal]:(h-2px w-full)"
+        class="bg-primary my-2 data-[orientation=horizontal]:(h-2px w-full)"
         orientation="horizontal"
       />
       <CorePortableText
-        v-if="data?.recipe?.story"
         :value="data.recipe.story"
-        class="mb-24px md:max-w-640px"
+        class="md:max-w-640px"
       />
       <Separator
-        class="bg-primary my-[15px] data-[orientation=horizontal]:(h-2px w-full)"
+        class="bg-primary my-2 data-[orientation=horizontal]:(h-2px w-full)"
         orientation="horizontal"
       />
+    </div>
+
+    <!-- Ingredients and Directions -->
+    <div class="grid col-span-1 grid-cols-1 gap-4 container md:(col-span-2 grid-cols-3)">
+      <div class="col-span-1">
+        <div class="flex-vertical color-primary flex-1 items-center justify-between">
+          <div class="w-full flex items-center px-5">
+            <span class="text-h6-sm md:text-h6 grow">
+              Ingredients
+            </span>
+            <span class="grow-0">
+              Serves {{ data?.recipe?.servings }}
+            </span>
+          </div>
+          <Separator
+            class="bg-primary my-2 data-[orientation=horizontal]:(h-1px w-full)"
+            orientation="horizontal"
+          />
+        </div>
+        <CoreIngredientsAccordion
+          v-if="data?.recipe?.isIngredientWithComponent"
+          :items="data?.recipe?.ingredientsWithComponent!"
+        />
+        <div
+          v-else
+          class="color-primary px-5 py-4"
+        >
+          <div
+            v-for="ingredient in data?.recipe?.ingredientsWithoutComponent"
+            :key="ingredient._key"
+            class="flex flex-1 items-center justify-between py-1"
+          >
+            <span>
+              {{ ingredient.name }}
+            </span>
+            <span>
+              {{ ingredient.measurement }} {{ ingredient.unit }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-span-1 md:col-span-2">
+        <div class="flex-vertical color-primary flex-1 items-center justify-between">
+          <span class="text-h6-sm md:text-h6 w-full px-5">
+            Directions
+          </span>
+          <Separator
+            class="bg-primary my-2 data-[orientation=horizontal]:(h-1px w-full)"
+            orientation="horizontal"
+          />
+        </div>
+        <CoreDirectionsAccordion
+          :items="data?.recipe?.directions!"
+        />
+      </div>
     </div>
   </article>
 </template>

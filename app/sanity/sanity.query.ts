@@ -159,7 +159,12 @@ export const recipeQuery = groq`
       inspiredBy,
       foodPhotographyBy,
       foodStylingBy,
+      servings,
       story,
+      isIngredientWithComponent,
+      ingredientsWithComponent,
+      ingredientsWithoutComponent,
+      directions,
     },
   }
 `;
