@@ -2,7 +2,7 @@
 import { PortableText, type PortableTextProps, type PortableTextVueComponents } from '@portabletext/vue';
 import { computed, h, useAttrs, type VNode } from 'vue';
 
-const { textSize } = withDefaults(defineProps<PortableTextProps & {
+const props = withDefaults(defineProps<PortableTextProps & {
   textSize?: 'large' | 'medium' | 'small';
 }>(), {
   textSize: 'large',
@@ -11,9 +11,9 @@ const { textSize } = withDefaults(defineProps<PortableTextProps & {
 const attrs = useAttrs();
 
 const TEXT_STYLE = computed(() => {
-  if (textSize === 'large') {
+  if (props.textSize === 'large') {
     return 'text-body-large-sm md:text-body-large';
-  } else if (textSize === 'medium') {
+  } else if (props.textSize === 'medium') {
     return 'text-body-medium-sm md:text-body-medium';
   } else {
     return 'text-body-small-sm md:text-body-small';
