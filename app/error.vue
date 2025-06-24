@@ -15,7 +15,7 @@ defineProps<{
           alt="coffee pot"
           class="z-background fluid-h-200-400 fluid-top-160-240 fluid-left-200-350 absolute hidden rotate-5 md:block"
         />
-        <div class="text-primary-light md:flex-center mt-164px h-full flex-col gap-y-4 text-center container md:(mt-0)">
+        <div class="md:flex-center text-primary-light mt-164px h-full flex-col gap-y-4 text-center container md:(mt-0)">
           <h1 class="text-h1-sm md:text-h1">
             {{ error?.statusCode }}
           </h1>
@@ -28,14 +28,14 @@ defineProps<{
           <!-- this is for internal display, to help debugging non-404 errors -->
           <div
             v-else
+            class="container"
           >
             <p
-              class="md:text-sh2 mt-4 md:(max-w-110)"
+              class="text-sh2 mt-4"
               v-html="error.message"
             />
             <p
-
-              class="md:text-sh2 mt-4 md:(max-w-110)"
+              class="text-sh2 mt-4"
               v-html="error.stack"
             />
           </div>

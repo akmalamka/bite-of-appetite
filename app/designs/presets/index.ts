@@ -59,8 +59,9 @@ export function presetCore(): Preset<Theme> {
         background: '-10',
         base: '0',
         content: '10',
-        header: '20',
-        dialog: '30',
+        popover: '20',
+        header: '30',
+        dialog: '40',
       },
 
       colors: {

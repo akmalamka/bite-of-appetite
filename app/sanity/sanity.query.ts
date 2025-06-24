@@ -53,7 +53,18 @@ const COMPONENT_RECIPE_LIST = `
         ${IMAGE_ASSET_QUERY}
       },
     },
-    'totalRecipes': count(*[_type == 'recipes']),
+    'categoryGroups': *[
+    _type == "categoryGroups"
+    ] {
+      _id,
+      title,
+      "categories": *[
+        _type == "categories" && references(^._id)
+      ] {
+        _id,
+        title,
+      },
+    },
   }
 `;
 

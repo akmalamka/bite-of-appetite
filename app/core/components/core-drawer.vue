@@ -45,9 +45,9 @@ watch(modelValue, () => {
 
             <span class="hidden md:block">Close</span>
 
-            <DrawerClose class="flex-center color-primary border-primary size-10 border rounded-full bg-white">
+            <DrawerClose class="flex-center border-primary color-primary size-10 border rounded-full bg-white">
               <i
-                class="color-primary i-material-symbols:close-rounded size-4"
+                class="i-material-symbols:close-rounded color-primary size-4"
               />
             </DrawerClose>
           </div>

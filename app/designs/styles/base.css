@@ -1,8 +1,8 @@
 :root {
-  --navbar-height: 80px;
+  --navbar-height: 70px;
 
   @screen md {
-    --navbar-height: 96px;
+    --navbar-height: 86px;
   }
 }
 

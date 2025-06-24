@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import type { PickPageComponent } from '~/core/core.entity';
+import type { Category, PickPageComponent } from '~/core/core.entity';
 import { navigateTo } from '#imports';
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 
 const { data } = defineProps<{
   data: PickPageComponent<'recipeList'>;
@@ -14,11 +14,18 @@ const isLoading = ref(false);
 
 const search = ref('');
 
+const draftCategories = ref<Array<Category>>([]);
+const selectedCategories = ref<Array<Category>>([]);
+
+const applyFilter = ref(false);
+
 const filteredRecipes = computed(() => {
   const filtered = data.recipes.filter(
     (recipe) => {
       const hasText = recipe.title?.toLowerCase().includes(search.value.toLowerCase());
-      return hasText;
+      const recipeCategoryIds = new Set(recipe.categories.map((cat) => cat._id));
+      const isAllCategorySelected = selectedCategories.value.every((selCat) => recipeCategoryIds.has(selCat._id));
+      return hasText && (isAllCategorySelected || selectedCategories.value.length === 0);
     },
   ) ?? [];
   return filtered;
@@ -29,6 +36,21 @@ const displayedRecipes = computed(() => {
     (currentPage.value - 1) * ITEMS_PER_PAGE,
     currentPage.value * ITEMS_PER_PAGE,
   );
+});
+
+function onCloseChip(category: Category) {
+  selectedCategories.value = selectedCategories.value.filter((item) => item._id !== category._id);
+  draftCategories.value = draftCategories.value.filter((item) => item._id !== category._id);
+}
+
+function onClearAll() {
+  selectedCategories.value = [];
+  draftCategories.value = [];
+}
+
+watch(applyFilter, () => {
+  selectedCategories.value = [...draftCategories.value];
+  applyFilter.value = false;
 });
 
 const recipeListRef = ref<HTMLElement>();
@@ -44,15 +66,46 @@ const recipeListRef = ref<HTMLElement>();
     ref="recipeListRef"
     class="flex-vertical-center mb-8 gap-y-4 first:mt-$navbar-height"
   >
+    <!-- Title and Search Bar -->
     <CoreHeroTitle :title=" data.title">
       <template #prepend>
-        <CoreSearchBar
-          v-model="search"
+        <CoreSearchFilterBar
+          v-model:search="search"
+          v-model:categories="draftCategories"
+          v-model:apply-filter="applyFilter"
           class-wrapper="flex-1 bg-primary-light"
           placeholder="Try 'scrambled egg'"
+          :category-groups="data.categoryGroups"
         />
+        <div class="mt-4 flex flex-wrap gap-2">
+          <CoreChip
+            v-for="selectedCategory in selectedCategories"
+            :key="selectedCategory._id"
+            with-button
+          >
+            {{ selectedCategory.title }}
+            <button
+              class="flex-center bg-primary-light/70 size-6 rounded-full hover:opacity-90"
+              @click="onCloseChip(selectedCategory)"
+            >
+              <i
+                class="color-primary i-material-symbols:close-rounded p-1"
+              />
+            </button>
+          </CoreChip>
+          <CoreChip
+            v-if="selectedCategories.length > 0"
+            as="button"
+            class="hover:bg-white/20"
+            @click="onClearAll"
+          >
+            Clear All
+          </CoreChip>
+        </div>
       </template>
     </CoreHeroTitle>
+
+    <!-- Recipe List -->
     <template v-if="filteredRecipes.length > 0">
       <ul class="flex-vertical-center gap-y-4 container md:gap-y-8">
         <li
@@ -75,10 +128,10 @@ const recipeListRef = ref<HTMLElement>();
                 {{ category.title }}
               </CoreChip>
             </div>
-            <h2 class="text-h3-sm color-primary md:text-h3 font-700">
+            <h2 class="color-primary text-h3-sm md:text-h3 font-700">
               {{ recipe.title }}
             </h2>
-            <h3 class="text-body-medium color-primary">
+            <h3 class="color-primary text-body-medium">
               {{ recipe.subtitle }}
             </h3>
             <CoreButton

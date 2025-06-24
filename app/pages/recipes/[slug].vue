@@ -36,7 +36,7 @@ const { formatDate } = useDateFormatter();
         <h1 class="text-h4-sm md:text-h4 text-center">
           {{ data?.recipe?.title }}
         </h1>
-        <h2 class="md:text-sh2 text-sh2-sm text-center">
+        <h2 class="text-sh2-sm md:text-sh2 text-center">
           {{ data?.recipe?.subtitle }}
         </h2>
         <h3 class="text-body-medium text-center">
