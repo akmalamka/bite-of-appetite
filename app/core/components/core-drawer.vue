@@ -3,6 +3,12 @@ import { VisuallyHidden } from 'radix-vue';
 import { DrawerClose, DrawerContent, DrawerDescription, DrawerOverlay, DrawerPortal, DrawerRoot, DrawerTitle } from 'vaul-vue';
 import { watch } from 'vue';
 
+withDefaults(defineProps<{
+  bgContent?: string;
+}>(), {
+  bgContent: 'bg-primary',
+});
+
 const modelValue = defineModel({ default: false });
 
 watch(modelValue, () => {
@@ -24,7 +30,8 @@ watch(modelValue, () => {
       />
 
       <DrawerContent
-        class="z-dialog bg-primary fixed bottom-0 left-0 right-0 top-0 md:(left-unset w-45%)"
+        class="z-dialog fixed bottom-0 left-0 right-0 top-0 md:(left-unset w-45%)"
+        :class="[bgContent]"
       >
         <!-- To prevent dialog description missing warning, dialog description must be added -->
         <VisuallyHidden>
@@ -53,7 +60,7 @@ watch(modelValue, () => {
           </div>
         </DrawerTitle>
 
-        <div class="h-[calc(100dvh-var(--navbar-height))] overflow-y-auto">
+        <div class="hide-scrollbar h-[calc(100dvh-var(--navbar-height))]">
           <slot />
         </div>
       </DrawerContent>

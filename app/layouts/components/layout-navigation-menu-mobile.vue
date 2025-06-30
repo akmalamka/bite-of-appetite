@@ -23,13 +23,13 @@ function handleMenuClick(menuLink: string) {
 </script>
 
 <template>
-  <div class="flex-vertical size-full justify-between px-5 pb-5 pt-88px md:hidden">
+  <div class="flex-vertical size-full justify-between px-5 pb-5 pt-88px container md:hidden">
     <div class="flex-vertical gap-y-8">
       <NuxtLink
         v-for="menu in data.navigation"
         :key="menu._id"
         :to="menu.link"
-        class="text-h6 color-primary-light"
+        class="color-primary-light text-h6"
         active-class="decoration-1 offsetted-underline"
         @click="handleMenuClick(menu.link!)"
       >
@@ -37,7 +37,7 @@ function handleMenuClick(menuLink: string) {
       </NuxtLink>
     </div>
 
-    <div class="text-body-large color-primary-light flex justify-between">
+    <div class="color-primary-light text-body-large flex justify-between">
       <NuxtLink
         v-for="social in data.socials"
         :key="social._key"

@@ -118,7 +118,9 @@ useIntersectionObserver(
         />
       </button>
 
-      <CoreDrawer v-model="isNavOpen">
+      <CoreDrawer
+        v-model="isNavOpen"
+      >
         <LayoutNavigationMenuMobile
           :data="data"
           @close-nav="handleCloseNav"

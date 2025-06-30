@@ -2,11 +2,16 @@
 import type { Category, PickPageComponent } from '~/core/core.entity';
 import { navigateTo } from '#imports';
 import { computed, ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
+import { useIsDesktop } from '~/core/composables/use-is-desktop';
 
 const { data } = defineProps<{
   data: PickPageComponent<'recipeList'>;
 }>();
 const ITEMS_PER_PAGE = 2;
+
+const route = useRoute();
+const isDesktop = useIsDesktop();
 
 const currentPage = ref(1);
 
@@ -18,6 +23,10 @@ const draftCategories = ref<Array<Category>>([]);
 const selectedCategories = ref<Array<Category>>([]);
 
 const applyFilter = ref(false);
+
+const isDrawerOpen = ref(false);
+
+const isPopoverOpen = ref(false);
 
 const filteredRecipes = computed(() => {
   const filtered = data.recipes.filter(
@@ -43,6 +52,11 @@ function onCloseChip(category: Category) {
   draftCategories.value = draftCategories.value.filter((item) => item._id !== category._id);
 }
 
+function onApplyFilter() {
+  applyFilter.value = !applyFilter.value;
+  isDrawerOpen.value = false;
+}
+
 function onClearAll() {
   selectedCategories.value = [];
   draftCategories.value = [];
@@ -52,6 +66,33 @@ watch(applyFilter, () => {
   selectedCategories.value = [...draftCategories.value];
   applyFilter.value = false;
 });
+
+/* We need to close the mobile menu if screensize is larger than md (768px), and close the popover if screensize is lower than md (768px) */
+watch(
+  isDesktop,
+  (isDesktop_) => {
+    if (isDesktop_) {
+      if (isDrawerOpen.value) {
+        isDrawerOpen.value = false;
+        isPopoverOpen.value = true;
+      }
+    } else {
+      if (isPopoverOpen.value) {
+        isPopoverOpen.value = false;
+        isDrawerOpen.value = true;
+      }
+    }
+  },
+);
+
+// Close the mobile menu when route changes
+watch(
+  () => route.path,
+  () => {
+    isDrawerOpen.value = false;
+    isPopoverOpen.value = false;
+  },
+);
 
 const recipeListRef = ref<HTMLElement>();
 </script>
@@ -66,13 +107,15 @@ const recipeListRef = ref<HTMLElement>();
     ref="recipeListRef"
     class="flex-vertical-center mb-8 gap-y-4 first:mt-$navbar-height"
   >
-    <!-- Title and Search Bar -->
+    <!-- Title and Search and Filter Bar -->
     <CoreHeroTitle :title=" data.title">
       <template #prepend>
         <CoreSearchFilterBar
           v-model:search="search"
           v-model:categories="draftCategories"
           v-model:apply-filter="applyFilter"
+          v-model:is-drawer-open="isDrawerOpen"
+          v-model:is-popover-open="isPopoverOpen"
           class-wrapper="flex-1 bg-primary-light"
           placeholder="Try 'scrambled egg'"
           :category-groups="data.categoryGroups"
@@ -176,5 +219,26 @@ const recipeListRef = ref<HTMLElement>();
         Sorry, looks like there's no such recipe you're looking for :(
       </span>
     </div>
+
+    <!-- Filter Drawer on Mobile -->
+    <CoreDrawer
+      v-model="isDrawerOpen"
+      bg-content="bg-primary-light"
+    >
+      <div class="mb-8 h-80dvh overflow-y-auto container">
+        <CoreCategoryList
+          v-model:categories="draftCategories"
+          :category-groups="data.categoryGroups"
+        />
+      </div>
+      <CoreButton
+        variant="filled"
+        class="absolute bottom-1 mt-4 container"
+        full-width
+        @click="onApplyFilter"
+      >
+        Apply Filter
+      </CoreButton>
+    </CoreDrawer>
   </section>
 </template>
