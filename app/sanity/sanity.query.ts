@@ -85,6 +85,7 @@ export const pageQuery = groq`
     title,
     description,
     ogImage,
+    navigationTextColor,
     components[] {
       ...,
 

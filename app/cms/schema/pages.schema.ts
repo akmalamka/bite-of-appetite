@@ -77,6 +77,24 @@ export const pagesSchema = defineType({
   fields: [
     ...seoSchemas,
     ...componentsSchemas,
+    defineField({
+      name: 'navigationTextColor',
+      type: 'simplerColor',
+      options: {
+        colorList: [
+          /**
+           * ! Do not remove `unoClass`.
+           * We need the unoClass to be able to set the background color of the next element of the divider.
+           * For reference, see `app/block/components/block-divider.vue`.
+           */
+          { label: 'Primary', value: '#664014', unoClass: 'color-primary' },
+          { label: 'Primary Light', value: '#E9E5DA', unoClass: 'color-primary-light' },
+        ],
+      },
+      validation: (rule) => [
+        rule.required(),
+      ],
+    }),
   ],
   preview: {
     select: {

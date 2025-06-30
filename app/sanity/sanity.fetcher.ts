@@ -9,7 +9,12 @@ export function useSanityLayoutFetcher() {
       'socials': *[_type == 'socialMedias'][0].socials,
       'navigation': *[
         _type == 'layoutNavigationMenu'
-      ] | order(order asc)
+      ] | order(order asc),
+      'navigationTextColors': *[_type == 'pages'][] {
+        title,
+        url,
+        navigationTextColor,
+      }
     }
   `;
 

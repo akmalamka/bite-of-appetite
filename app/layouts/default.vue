@@ -20,6 +20,7 @@ const { data } = await useSanityLayoutFetcher();
     :data="{
       navigation: data!.navigation,
       socials: data!.socials,
+      navigationTextColors: data!.navigationTextColors,
     }"
     :has-errors="!!error"
   />
