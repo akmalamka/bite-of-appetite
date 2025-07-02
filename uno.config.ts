@@ -1,61 +1,42 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { presetVinicunca } from '@vinicunca/unocss-preset-vinicunca';
 import {
   defineConfig,
   presetTypography,
-  presetUno,
+  presetWind3,
   transformerDirectives,
   transformerVariantGroup,
 } from 'unocss';
-
-// import { presetCore } from './app/designs/presets';
+// TODO: fix eslint error issue for presetCore
+import { presetCore } from './app/designs/presets';
 
 export default defineConfig({
-  // configDeps: getAllConfigFiles('app/designs/presets'),
+  configDeps: getAllConfigFiles('app/designs/presets'),
 
   layers: {
-    fonts: -30,
+    fonts: -20,
     preflights: -10,
   },
 
   presets: [
-    // presetVinicunca({
-    //   fluidOptions: {
-    //     minWidth: 360,
-    //   },
-    //   icons: {
-    //     extraProperties: {
-    //       'display': 'inline-block',
-    //       'vertical-align': 'middle',
-    //     },
-    //     scale: 1.25,
-    //     warn: true,
-    //   },
-    // }),
-    presetUno(),
-    // presetCore(),
-    presetTypography({
-      cssExtend: {
-        'h1': {
-          /**
-           * Since the title of the article is separated by the grid's gap,
-           *  we need to remove the margin.
-           */
-          margin: '0',
+    presetVinicunca({
+      fluidOptions: {
+        minWidth: 360,
+      },
+      icons: {
+        extraProperties: {
+          'display': 'inline-block',
+          'vertical-align': 'middle',
         },
-
-        'blockquote': {
-          'margin-top': '3rem',
-          'margin-bottom': '3rem',
-          'padding': '0.5rem 1rem',
-          'font-size': '1.7em',
-          'font-style': 'italic',
-          'border-left-width': '0.25rem',
-        },
-
-        'h5+p': {
-          'margin-top': '0.25rem',
-        },
+        scale: 1.25,
+        warn: true,
       },
     }),
+    presetWind3(),
+    presetCore(),
+    presetTypography(),
   ],
 
   transformers: [
@@ -63,3 +44,10 @@ export default defineConfig({
     transformerVariantGroup(),
   ],
 });
+
+function getAllConfigFiles(dir: string) {
+  const __dirname = path.dirname(fileURLToPath(import.meta.url));
+  const dirFull = path.join(__dirname, dir);
+  const files = fs.readdirSync(dirFull);
+  return files.filter((file) => path.extname(file) === '.ts').map((file) => path.join(dir, file));
+}

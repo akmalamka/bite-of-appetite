@@ -1,0 +1,93 @@
+:root {
+  --navbar-height: 70px;
+
+  @screen md {
+    --navbar-height: 86px;
+  }
+}
+
+html {
+  @apply h-full bg-primary-light;
+
+  scroll-behavior: smooth;
+
+  scroll-padding-top: calc(var(--navbar-height) + 32px);
+}
+
+body {
+  @apply h-full;
+}
+
+#__nuxt {
+  @apply h-full;
+}
+
+.accordion-root {
+  @apply grid w-full shadow-[0_2px_10px];
+}
+
+.accordion-item {
+@apply color-primary focus-within:z-content focus-within:shadow-primary/80 mt-px w-full focus-within:(relative z-10 shadow-[0_0_0_2px]) first:mt-0 first:rounded-t last:rounded-b;
+}
+
+.accordion-header {
+  @apply flex;
+}
+
+.accordion-trigger {
+  @apply group shadow-primary/80 h-12 w-full flex flex-1 cursor-default items-center justify-between px-5 shadow-[0_0.5px_0] outline-none hover:bg-white/10;
+}
+
+.accordion-trigger[data-state='open'] {
+  .plusminus {
+    &::before {
+      transform: translatey(-50%) rotate(-90deg);
+      opacity: 0;
+    }
+    &::after {
+      transform: translatey(-50%) rotate(0);
+    }
+  }
+}
+
+.accordion-content {
+  @apply overflow-hidden text-body-medium;
+  transition: all 500ms cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+.accordion-content[data-state='open'] {
+  animation: slideDown 500ms cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+.accordion-content[data-state='closed'] {
+  animation: slideUp 500ms cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+@keyframes slideDown {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

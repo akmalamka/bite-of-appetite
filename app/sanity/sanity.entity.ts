@@ -13,8 +13,328 @@
  */
 
 // Source: schema.json
-// Query TypeMap
-import '@sanity/client';
+export type LinkSelection = string;
+
+export type RecipeList = {
+  _type: 'recipeList';
+  title: string;
+};
+
+export type ArticleList = {
+  _type: 'articleList';
+  title: string;
+};
+
+export type ImageCarousel = {
+  _type: 'imageCarousel';
+  title: string;
+  contentReference: 'recipes' | 'foodForThought';
+  ctaButton?: {
+    ctaText: string;
+    ctaLink: LinkSelection;
+  };
+};
+
+export type HeroQuote = {
+  _type: 'heroQuote';
+  quote: string;
+  author?: string;
+};
+
+export type HeroImage = {
+  _type: 'heroImage';
+  title: string;
+  typingTexts?: Array<string>;
+  subtitle: string;
+  image: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: 'imageWithAlt';
+  };
+  imagePosition: 'left' | 'right';
+  ctaButton?: {
+    ctaText: string;
+    ctaLink: LinkSelection;
+  };
+};
+
+export type SocialMedias = {
+  _id: string;
+  _type: 'socialMedias';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  socials: Array<{
+    title?: string;
+    link: string;
+    _type: 'social';
+    _key: string;
+  }>;
+};
+
+export type Categories = {
+  _id: string;
+  _type: 'categories';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title: string;
+  categoryGroup?: {
+    _ref: string;
+    _type: 'reference';
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: 'categoryGroups';
+  };
+};
+
+export type CategoryGroups = {
+  _id: string;
+  _type: 'categoryGroups';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title: string;
+};
+
+export type Articles = {
+  _id: string;
+  _type: 'articles';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title: string;
+  slug: Slug;
+  publishedDate: string;
+  subtitle: string;
+  image: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: 'imageWithAlt';
+  };
+  writingBy: string;
+  photoBy: string;
+  story: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: 'span';
+      _key: string;
+    }>;
+    style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote';
+    listItem?: 'bullet' | 'number';
+    markDefs?: Array<{
+      href?: string;
+      _type: 'link';
+      _key: string;
+    }>;
+    level?: number;
+    _type: 'block';
+    _key: string;
+  }>;
+};
+
+export type Recipes = {
+  _id: string;
+  _type: 'recipes';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title: string;
+  slug: Slug;
+  publishedDate: string;
+  categories: Array<{
+    _ref: string;
+    _type: 'reference';
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: 'categories';
+  }>;
+  subtitle: string;
+  image: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: 'imageWithAlt';
+  };
+  time: string;
+  recipeBy: string;
+  inspiredBy?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: 'span';
+      _key: string;
+    }>;
+    style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote';
+    listItem?: 'bullet' | 'number';
+    markDefs?: Array<{
+      href?: string;
+      _type: 'link';
+      _key: string;
+    }>;
+    level?: number;
+    _type: 'block';
+    _key: string;
+  }>;
+  foodPhotographyBy: string;
+  foodStylingBy: string;
+  story?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: 'span';
+      _key: string;
+    }>;
+    style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote';
+    listItem?: 'bullet' | 'number';
+    markDefs?: Array<{
+      href?: string;
+      _type: 'link';
+      _key: string;
+    }>;
+    level?: number;
+    _type: 'block';
+    _key: string;
+  }>;
+  isIngredientWithComponent?: boolean;
+  servings: string;
+  ingredientsWithComponent?: Array<{
+    title: string;
+    ingredients: Array<{
+      name: string;
+      measurement?: string;
+      unit?: string;
+      _type: 'ingredient';
+      _key: string;
+    }>;
+    _type: 'component';
+    _key: string;
+  }>;
+  ingredientsWithoutComponent?: Array<{
+    name: string;
+    measurement?: string;
+    unit?: string;
+    _type: 'ingredient';
+    _key: string;
+  }>;
+  directions: Array<{
+    title: string;
+    step: string;
+    tips?: string;
+    _type: 'direction';
+    _key: string;
+  }>;
+};
+
+export type ImageWithAlt = {
+  _type: 'imageWithAlt';
+  asset?: {
+    _ref: string;
+    _type: 'reference';
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+  };
+  media?: unknown;
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
+  alt: string;
+};
+
+export type LayoutNavigationMenu = {
+  _id: string;
+  _type: 'layoutNavigationMenu';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  order?: number;
+  text?: string;
+  link?: LinkSelection;
+};
+
+export type Pages = {
+  _id: string;
+  _type: 'pages';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  url: Slug;
+  description?: string;
+  ogImage?: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: 'image';
+  };
+  components?: Array<{
+    _key: string;
+  } & HeroImage | {
+    _key: string;
+  } & HeroQuote | {
+    _key: string;
+  } & ImageCarousel | {
+    _key: string;
+  } & ArticleList | {
+    _key: string;
+  } & RecipeList>;
+  navigationTextColor: SimplerColor;
+};
+
+export type HighlightColor = {
+  _type: 'highlightColor';
+  label?: string;
+  value?: string;
+};
+
+export type TextColor = {
+  _type: 'textColor';
+  label?: string;
+  value?: string;
+};
+
+export type SimplerColor = {
+  _type: 'simplerColor';
+  label?: string;
+  value?: string;
+};
+
+export type MediaTag = {
+  _id: string;
+  _type: 'media.tag';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: Slug;
+};
 
 export type SanityImagePaletteSwatch = {
   _type: 'sanity.imagePaletteSwatch';
@@ -121,6 +441,12 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type Slug = {
+  _type: 'slug';
+  current: string;
+  source?: string;
+};
+
 export type SanityAssetSourceData = {
   _type: 'sanity.assetSourceData';
   name?: string;
@@ -128,45 +454,323 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type Header = {
-  _id: string;
-  _type: 'header';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-};
-
-export type MediaTag = {
-  _id: string;
-  _type: 'media.tag';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: Slug;
-};
-
-export type Slug = {
-  _type: 'slug';
-  current: string;
-  source?: string;
-};
-
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | SanityAssetSourceData | Header | MediaTag | Slug;
+export type AllSanitySchemaTypes = LinkSelection | RecipeList | ArticleList | ImageCarousel | HeroQuote | HeroImage | SocialMedias | Categories | CategoryGroups | Articles | Recipes | ImageWithAlt | LayoutNavigationMenu | Pages | HighlightColor | TextColor | SimplerColor | MediaTag | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../sanity/sanity.fetcher.ts
+// Variable: layoutQuery
+// Query: {      'socials': *[_type == 'socialMedias'][0].socials,      'navigation': *[        _type == 'layoutNavigationMenu'      ] | order(order asc),      'navigationTextColors': *[_type == 'pages'][] {        title,        url,        navigationTextColor,      }    }
+export type LayoutQueryResult = {
+  socials: Array<{
+    title?: string;
+    link: string;
+    _type: 'social';
+    _key: string;
+  }> | null;
+  navigation: Array<{
+    _id: string;
+    _type: 'layoutNavigationMenu';
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    order?: number;
+    text?: string;
+    link?: LinkSelection;
+  }>;
+  navigationTextColors: Array<{
+    title: string | null;
+    url: Slug;
+    navigationTextColor: SimplerColor;
+  }>;
+};
+
+// Source: ../sanity/sanity.query.ts
 // Variable: pageQuery
-// Query: *[      _type == 'header'    ][0]
+// Query: *[    _type == 'pages'    && url.current == $slug  ][0] {    title,    description,    ogImage,    navigationTextColor,    components[] {      ...,        _type == 'imageCarousel' => {    ...,    'recipes': *[      _type == 'recipes'    ] | order(date desc) [0...8] {      _id,      title,      subtitle,      image {          asset->{    "dimensions": metadata.dimensions,    "lqip": metadata.lqip,    altText,    "_ref": _id  }      },    },  },        _type == 'articleList' => {    ...,    'articles': *[      _type == 'articles'    ] | order(publishedDate desc) [0...5] {      _id,      slug,      title,      subtitle,      image {          asset->{    "dimensions": metadata.dimensions,    "lqip": metadata.lqip,    altText,    "_ref": _id  }      },    },    'totalArticles': count(*[_type == 'articles']),  },        _type == 'recipeList' => {    ...,    'recipes': *[      _type == 'recipes'    ] | order(publishedDate desc) [] {      _id,      slug,      title,      subtitle,      categories[]-> {        _id,        title,      },      image {          asset->{    "dimensions": metadata.dimensions,    "lqip": metadata.lqip,    altText,    "_ref": _id  }      },    },    'categoryGroups': *[    _type == "categoryGroups"    ] {      _id,      title,      "categories": *[        _type == "categories" && references(^._id)      ] {        _id,        title,      },    },  },        _type == 'heroImage' => {    ...,    image {        asset->{    "dimensions": metadata.dimensions,    "lqip": metadata.lqip,    altText,    "_ref": _id  }    },  },    },  }
 export type PageQueryResult = {
-  _id: string;
-  _type: 'header';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
+  title: string | null;
+  description: string | null;
+  ogImage: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: 'image';
+  } | null;
+  navigationTextColor: SimplerColor;
+  components: Array<{
+    _key: string;
+    _type: 'articleList';
+    title: string;
+    articles: Array<{
+      _id: string;
+      slug: Slug;
+      title: string;
+      subtitle: string;
+      image: {
+        asset: {
+          dimensions: SanityImageDimensions | null;
+          lqip: string | null;
+          altText: string | null;
+          _ref: string;
+        } | null;
+      };
+    }>;
+    totalArticles: number;
+  } | {
+    _key: string;
+    _type: 'heroImage';
+    title: string;
+    typingTexts?: Array<string>;
+    subtitle: string;
+    image: {
+      asset: {
+        dimensions: SanityImageDimensions | null;
+        lqip: string | null;
+        altText: string | null;
+        _ref: string;
+      } | null;
+    };
+    imagePosition: 'left' | 'right';
+    ctaButton?: {
+      ctaText: string;
+      ctaLink: LinkSelection;
+    };
+  } | {
+    _key: string;
+    _type: 'heroQuote';
+    quote: string;
+    author?: string;
+  } | {
+    _key: string;
+    _type: 'imageCarousel';
+    title: string;
+    contentReference: 'foodForThought' | 'recipes';
+    ctaButton?: {
+      ctaText: string;
+      ctaLink: LinkSelection;
+    };
+    recipes: Array<{
+      _id: string;
+      title: string;
+      subtitle: string;
+      image: {
+        asset: {
+          dimensions: SanityImageDimensions | null;
+          lqip: string | null;
+          altText: string | null;
+          _ref: string;
+        } | null;
+      };
+    }>;
+  } | {
+    _key: string;
+    _type: 'recipeList';
+    title: string;
+    recipes: Array<{
+      _id: string;
+      slug: Slug;
+      title: string;
+      subtitle: string;
+      categories: Array<{
+        _id: string;
+        title: string;
+      }>;
+      image: {
+        asset: {
+          dimensions: SanityImageDimensions | null;
+          lqip: string | null;
+          altText: string | null;
+          _ref: string;
+        } | null;
+      };
+    }>;
+    categoryGroups: Array<{
+      _id: string;
+      title: string;
+      categories: Array<{
+        _id: string;
+        title: string;
+      }>;
+    }>;
+  }> | null;
 } | null;
+// Variable: paginatedArticlesQuery
+// Query: *[_type == 'articles'] | order(publishedDate desc) [$start...$end] {    _id,    slug,    title,    subtitle,    image {        asset->{    "dimensions": metadata.dimensions,    "lqip": metadata.lqip,    altText,    "_ref": _id  }    },  }
+export type PaginatedArticlesQueryResult = Array<{
+  _id: string;
+  slug: Slug;
+  title: string;
+  subtitle: string;
+  image: {
+    asset: {
+      dimensions: SanityImageDimensions | null;
+      lqip: string | null;
+      altText: string | null;
+      _ref: string;
+    } | null;
+  };
+}>;
+// Variable: articleQuery
+// Query: {    'article': *[      _type == 'articles'      && slug.current == $slug    ][0] {      _id,      title,      publishedDate,      subtitle,      image {          asset->{    "dimensions": metadata.dimensions,    "lqip": metadata.lqip,    altText,    "_ref": _id  }      },      writingBy,      photoBy,      story,    },  }
+export type ArticleQueryResult = {
+  article: {
+    _id: string;
+    title: string;
+    publishedDate: string;
+    subtitle: string;
+    image: {
+      asset: {
+        dimensions: SanityImageDimensions | null;
+        lqip: string | null;
+        altText: string | null;
+        _ref: string;
+      } | null;
+    };
+    writingBy: string;
+    photoBy: string;
+    story: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: 'span';
+        _key: string;
+      }>;
+      style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal';
+      listItem?: 'bullet' | 'number';
+      markDefs?: Array<{
+        href?: string;
+        _type: 'link';
+        _key: string;
+      }>;
+      level?: number;
+      _type: 'block';
+      _key: string;
+    }>;
+  } | null;
+};
+// Variable: recipeQuery
+// Query: {    'recipe': *[      _type == 'recipes'      && slug.current == $slug    ][0] {      _id,      title,      publishedDate,      subtitle,      categories[]-> {        _id,        title,      },      image {          asset->{    "dimensions": metadata.dimensions,    "lqip": metadata.lqip,    altText,    "_ref": _id  }      },      time,      recipeBy,      inspiredBy,      foodPhotographyBy,      foodStylingBy,      servings,      story,      isIngredientWithComponent,      ingredientsWithComponent,      ingredientsWithoutComponent,      directions,      'nextRecipes': *[        _type == 'recipes' &&        slug.current != $slug      ] [0...6] {        _id,        slug,        title,        subtitle,        categories[]-> {          _id,          title,        },        image {            asset->{    "dimensions": metadata.dimensions,    "lqip": metadata.lqip,    altText,    "_ref": _id  }        },      }    },  }
+export type RecipeQueryResult = {
+  recipe: {
+    _id: string;
+    title: string;
+    publishedDate: string;
+    subtitle: string;
+    categories: Array<{
+      _id: string;
+      title: string;
+    }>;
+    image: {
+      asset: {
+        dimensions: SanityImageDimensions | null;
+        lqip: string | null;
+        altText: string | null;
+        _ref: string;
+      } | null;
+    };
+    time: string;
+    recipeBy: string;
+    inspiredBy: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: 'span';
+        _key: string;
+      }>;
+      style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal';
+      listItem?: 'bullet' | 'number';
+      markDefs?: Array<{
+        href?: string;
+        _type: 'link';
+        _key: string;
+      }>;
+      level?: number;
+      _type: 'block';
+      _key: string;
+    }> | null;
+    foodPhotographyBy: string;
+    foodStylingBy: string;
+    servings: string;
+    story: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: 'span';
+        _key: string;
+      }>;
+      style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal';
+      listItem?: 'bullet' | 'number';
+      markDefs?: Array<{
+        href?: string;
+        _type: 'link';
+        _key: string;
+      }>;
+      level?: number;
+      _type: 'block';
+      _key: string;
+    }> | null;
+    isIngredientWithComponent: boolean | null;
+    ingredientsWithComponent: Array<{
+      title: string;
+      ingredients: Array<{
+        name: string;
+        measurement?: string;
+        unit?: string;
+        _type: 'ingredient';
+        _key: string;
+      }>;
+      _type: 'component';
+      _key: string;
+    }> | null;
+    ingredientsWithoutComponent: Array<{
+      name: string;
+      measurement?: string;
+      unit?: string;
+      _type: 'ingredient';
+      _key: string;
+    }> | null;
+    directions: Array<{
+      title: string;
+      step: string;
+      tips?: string;
+      _type: 'direction';
+      _key: string;
+    }>;
+    nextRecipes: Array<{
+      _id: string;
+      slug: Slug;
+      title: string;
+      subtitle: string;
+      categories: Array<{
+        _id: string;
+        title: string;
+      }>;
+      image: {
+        asset: {
+          dimensions: SanityImageDimensions | null;
+          lqip: string | null;
+          altText: string | null;
+          _ref: string;
+        } | null;
+      };
+    }>;
+  } | null;
+};
+
+// Query TypeMap
+import '@sanity/client';
+
 declare module '@sanity/client' {
   interface SanityQueries {
-    '\n    *[\n      _type == \'header\'\n    ][0]\n  ': PageQueryResult;
+    '\n    {\n      \'socials\': *[_type == \'socialMedias\'][0].socials,\n      \'navigation\': *[\n        _type == \'layoutNavigationMenu\'\n      ] | order(order asc),\n      \'navigationTextColors\': *[_type == \'pages\'][] {\n        title,\n        url,\n        navigationTextColor,\n      }\n    }\n  ': LayoutQueryResult;
+    '\n  *[\n    _type == \'pages\'\n    && url.current == $slug\n  ][0] {\n    title,\n    description,\n    ogImage,\n    navigationTextColor,\n    components[] {\n      ...,\n\n      \n  _type == \'imageCarousel\' => {\n    ...,\n    \'recipes\': *[\n      _type == \'recipes\'\n    ] | order(date desc) [0...8] {\n      _id,\n      title,\n      subtitle,\n      image {\n        \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n      },\n    },\n  }\n,\n\n      \n  _type == \'articleList\' => {\n    ...,\n    \'articles\': *[\n      _type == \'articles\'\n    ] | order(publishedDate desc) [0...5] {\n      _id,\n      slug,\n      title,\n      subtitle,\n      image {\n        \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n      },\n    },\n    \'totalArticles\': count(*[_type == \'articles\']),\n  }\n,\n\n      \n  _type == \'recipeList\' => {\n    ...,\n    \'recipes\': *[\n      _type == \'recipes\'\n    ] | order(publishedDate desc) [] {\n      _id,\n      slug,\n      title,\n      subtitle,\n      categories[]-> {\n        _id,\n        title,\n      },\n      image {\n        \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n      },\n    },\n    \'categoryGroups\': *[\n    _type == "categoryGroups"\n    ] {\n      _id,\n      title,\n      "categories": *[\n        _type == "categories" && references(^._id)\n      ] {\n        _id,\n        title,\n      },\n    },\n  }\n,\n\n      \n  _type == \'heroImage\' => {\n    ...,\n    image {\n      \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n    },\n  }\n,\n\n    },\n  }\n': PageQueryResult;
+    '\n  *[_type == \'articles\'] | order(publishedDate desc) [$start...$end] {\n    _id,\n    slug,\n    title,\n    subtitle,\n    image {\n      \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n    },\n  }\n': PaginatedArticlesQueryResult;
+    '\n  {\n    \'article\': *[\n      _type == \'articles\'\n      && slug.current == $slug\n    ][0] {\n      _id,\n      title,\n      publishedDate,\n      subtitle,\n      image {\n        \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n      },\n      writingBy,\n      photoBy,\n      story,\n    },\n  }\n': ArticleQueryResult;
+    '\n  {\n    \'recipe\': *[\n      _type == \'recipes\'\n      && slug.current == $slug\n    ][0] {\n      _id,\n      title,\n      publishedDate,\n      subtitle,\n      categories[]-> {\n        _id,\n        title,\n      },\n      image {\n        \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n      },\n      time,\n      recipeBy,\n      inspiredBy,\n      foodPhotographyBy,\n      foodStylingBy,\n      servings,\n      story,\n      isIngredientWithComponent,\n      ingredientsWithComponent,\n      ingredientsWithoutComponent,\n      directions,\n      \'nextRecipes\': *[\n        _type == \'recipes\' &&\n        slug.current != $slug\n      ] [0...6] {\n        _id,\n        slug,\n        title,\n        subtitle,\n        categories[]-> {\n          _id,\n          title,\n        },\n        image {\n          \n  asset->{\n    "dimensions": metadata.dimensions,\n    "lqip": metadata.lqip,\n    altText,\n    "_ref": _id\n  }\n\n        },\n      }\n    },\n  }\n': RecipeQueryResult;
   }
 }
