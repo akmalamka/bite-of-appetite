@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { PickPageComponent } from '~/core/core.entity';
 import type { PaginatedArticlesQueryResult } from '~/sanity/sanity.entity';
-import { navigateTo, useSanityQuery } from '#imports';
+import { navigateTo, useRoute, useRouter, useSanityQuery } from '#imports';
 import { ref, watch } from 'vue';
 import { paginatedArticlesQuery } from '~/sanity/sanity.query';
 
@@ -9,9 +9,12 @@ const { data } = defineProps<{
   data: PickPageComponent<'articleList'>;
 }>();
 
+const route = useRoute();
+const router = useRouter();
+
 const displayedArticles = ref(data.articles || []);
 
-const currentPage = ref(1);
+const currentPage = ref(Number(route.query.page) || 1);
 
 const isLoading = ref(false);
 
@@ -45,6 +48,7 @@ async function loadArticles() {
 
 watch(currentPage, async (newPage: number) => {
   currentOffset.value = (newPage - 1) * ITEMS_PER_PAGE;
+  router.replace({ query: { ...route.query, page: newPage } });
   await loadArticles();
 });
 </script>

@@ -143,7 +143,6 @@ export const recipesSchema = defineType({
             defineField({
               name: 'ingredients',
               type: 'array',
-              validation: (rule) => rule.required().min(1).error('Ingredients must have at least 1 ingredient'),
               of: [
                 defineArrayMember({
                   name: 'ingredient',

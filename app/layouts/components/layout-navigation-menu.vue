@@ -119,7 +119,9 @@ useIntersectionObserver(
           :key="menu._id"
           :to="menu.link"
           class="text-h6 transition-colors-280"
-          :class="[textColor]"
+          :class="[textColor, {
+            'color-primary-light': hasScrolled && textColor === 'color-primary',
+          }]"
           active-class=" decoration-1 offsetted-underline"
         >
           {{ menu.text }}

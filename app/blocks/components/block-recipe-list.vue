@@ -2,18 +2,19 @@
 import type { Category, PickPageComponent } from '~/core/core.entity';
 import { navigateTo } from '#imports';
 import { computed, ref, watch } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { useIsDesktop } from '~/core/composables/use-is-desktop';
 
 const { data } = defineProps<{
   data: PickPageComponent<'recipeList'>;
 }>();
-const ITEMS_PER_PAGE = 2;
+const ITEMS_PER_PAGE = 5;
 
 const route = useRoute();
+const router = useRouter();
 const isDesktop = useIsDesktop();
 
-const currentPage = ref(1);
+const currentPage = ref(Number(route.query.page) || 1);
 
 const isLoading = ref(false);
 
@@ -65,6 +66,10 @@ function onClearAll() {
 watch(applyFilter, () => {
   selectedCategories.value = [...draftCategories.value];
   applyFilter.value = false;
+});
+
+watch(currentPage, (newPage) => {
+  router.replace({ query: { ...route.query, page: newPage } });
 });
 
 /* We need to close the mobile menu if screensize is larger than md (768px), and close the popover if screensize is lower than md (768px) */
@@ -171,10 +176,10 @@ const recipeListRef = ref<HTMLElement>();
                 {{ category.title }}
               </CoreChip>
             </div>
-            <h2 class="color-primary text-h3-sm md:text-h3 font-700">
+            <h2 class="text-h3-sm color-primary md:text-h3 font-700">
               {{ recipe.title }}
             </h2>
-            <h3 class="color-primary text-body-medium">
+            <h3 class="text-body-medium color-primary">
               {{ recipe.subtitle }}
             </h3>
             <CoreButton
@@ -186,7 +191,7 @@ const recipeListRef = ref<HTMLElement>();
           </div>
           <CoreSanityImage
             :image="recipe.image"
-            class="size-75% cursor-pointer rounded-12px object-cover object-center transition-transform duration-280 md:size-85% hover:scale-105"
+            class="md: size-60 size-80 cursor-pointer rounded-12px object-cover object-center transition-transform duration-280 lg:size-100 hover:scale-105"
             :class="{
               'order-1 md:order-2': index % 2 === 0,
               'order-1 md:order-1': index % 2 !== 0,
