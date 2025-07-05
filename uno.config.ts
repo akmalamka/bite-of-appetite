@@ -10,7 +10,7 @@ import {
   transformerVariantGroup,
 } from 'unocss';
 // TODO: fix eslint error issue for presetCore
-import { presetCore } from '~/designs/presets';
+import { presetCore } from './app/designs/presets';
 
 export default defineConfig({
   configDeps: getAllConfigFiles('app/designs/presets'),
