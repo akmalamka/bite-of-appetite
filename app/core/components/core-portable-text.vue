@@ -12,11 +12,11 @@ const attrs = useAttrs();
 
 const TEXT_STYLE = computed(() => {
   if (props.textSize === 'large') {
-    return 'text-body-large-sm md:text-body-large';
+    return 'text-body-large-sm md:text-body-large text-justify';
   } else if (props.textSize === 'medium') {
-    return 'text-body-medium-sm md:text-body-medium';
+    return 'text-body-medium-sm md:text-body-medium text-justify';
   } else {
-    return 'text-body-small-sm md:text-body-small';
+    return 'text-body-small-sm md:text-body-small text-justify';
   }
 });
 
@@ -38,7 +38,7 @@ const components: Partial<PortableTextVueComponents> = {
           return h(
             'p',
             {
-              class: [TEXT_STYLE, attrs.class],
+              class: [TEXT_STYLE.value, attrs.class],
             },
             content,
           );
@@ -48,8 +48,8 @@ const components: Partial<PortableTextVueComponents> = {
     },
   },
   list: {
-    bullet: (_, { slots }) => h('ul', { class: [TEXT_STYLE] }, slots.default?.()),
-    number: (_, { slots }) => h('ol', { class: [TEXT_STYLE] }, slots.default?.()),
+    bullet: (_, { slots }) => h('ul', { class: [TEXT_STYLE.value] }, slots.default?.()),
+    number: (_, { slots }) => h('ol', { class: [TEXT_STYLE.value] }, slots.default?.()),
   },
   listItem: {
     bullet: (_, { slots }) =>

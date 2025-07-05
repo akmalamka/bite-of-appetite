@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { PickPageComponent } from '~/core/core.entity';
+import { navigateTo } from '#app';
 import CoreCarouselContent from '~/core/components/carousel/core-carousel-content.vue';
 import CoreCarouselItem from '~/core/components/carousel/core-carousel-item.vue';
 import CoreCarouselNext from '~/core/components/carousel/core-carousel-next.vue';
@@ -12,7 +13,7 @@ defineProps<{
 </script>
 
 <template>
-  <section class="color-primary bg-primary-light py-4 first:mt-$navbar-height md:py-8">
+  <section class="bg-primary-light color-primary py-4 first:mt-$navbar-height md:py-8">
     <div class="flex-vertical-center gap-y-4 container">
       <h3 class="text-body-large font-500 uppercase">
         {{ data.contentReference }}
@@ -35,11 +36,15 @@ defineProps<{
           >
             <CoreSanityImage
               :image="recipe.image"
-              class="fluid-w-400-300 fluid-h-450-350 rounded-12px object-cover object-center"
+              class="fluid-w-400-300 fluid-h-450-350 cursor-pointer rounded-12px object-cover object-center transition-transform-280 hover:scale-105"
+              @click="navigateTo(`/recipes/${recipe.slug.current}`)"
             />
-            <span class="text-h5 text-center font-700 md:text-start">
+            <NuxtLink
+              class="text-h5 text-center font-700 md:text-start hover:underline"
+              :to="`/recipes/${recipe.slug.current}`"
+            >
               {{ recipe.title }}
-            </span>
+            </NuxtLink>
           </CoreCarouselItem>
         </CoreCarouselContent>
         <CoreCarouselPrevious />
