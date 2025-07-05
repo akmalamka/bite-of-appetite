@@ -36,7 +36,7 @@ withDefaults(defineProps<CoreButtonProps>(), {
 
 <style lang="postcss" scoped>
 .core-button {
-  @apply px-4 py-2.5 text-button transition-colors transition-transform duration-280 md:hover:scale-110;
+  @apply px-4 py-2.5 text-button transition-colors transition-transform duration-280 md:hover:scale-103;
   &--filled {
     @apply bg-green color-white border-transparent border-1 hover:(border-white);
   }

@@ -41,7 +41,7 @@ defineProps<{
           />
         </h1>
         <h2
-          class="text-body-medium w"
+          class="text-body-medium text-justify"
           :class="{
             'w-1/2': data.imagePosition === 'left',
             'w-full': data.imagePosition === 'right',

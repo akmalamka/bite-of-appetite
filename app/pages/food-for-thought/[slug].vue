@@ -56,14 +56,14 @@ const { formatDate } = useDateFormatter();
         </div>
       </div>
     </div>
-    <div class="flex-vertical-center color-primary col-span-1 my-4 gap-y-4 container md:(col-span-2 my-8 gap-y-8)">
+    <div class="flex-vertical-center color-primary col-span-1 my-4 gap-y-4 container md:(col-span-2 my-8 max-w-640px gap-y-8)">
       <h1 class="text-h2-sm md:text-h2 text-center">
         {{ data?.article?.title }}
       </h1>
       <CorePortableText
         v-if="data?.article?.story"
         :value="data.article.story"
-        class="mb-24px md:max-w-640px"
+        class="mb-6"
       />
     </div>
   </article>

@@ -8,6 +8,7 @@ const COMPONENT_IMAGE_CAROUSEL = `
       _type == 'recipes'
     ] | order(date desc) [0...8] {
       _id,
+      slug,
       title,
       subtitle,
       image {

@@ -24,7 +24,7 @@ const { formatDate } = useDateFormatter();
     <!-- Image and General Description -->
     <CoreSanityImage
       :image="data?.recipe?.image"
-      class="col-span-1 h-75dvh object-cover object-center md:(size-full max-h-full)"
+      class="col-span-1 h-100dvh object-cover object-center"
     />
     <div
       class="color-primary col-span-1"
@@ -85,7 +85,7 @@ const { formatDate } = useDateFormatter();
       class="flex-vertical-center color-primary col-span-1 my-4 gap-y-4 container md:(col-span-2 my-8 gap-y-8)"
     >
       <Separator
-        class="bg-primary my-2 data-[orientation=horizontal]:(h-2px w-full)"
+        class="bg-primary my-2 data-[orientation=horizontal]:(h-0.5px w-full)"
         orientation="horizontal"
       />
       <CorePortableText
@@ -93,13 +93,13 @@ const { formatDate } = useDateFormatter();
         class="md:max-w-640px"
       />
       <Separator
-        class="bg-primary my-2 data-[orientation=horizontal]:(h-2px w-full)"
+        class="bg-primary my-2 data-[orientation=horizontal]:(h-0.5px w-full)"
         orientation="horizontal"
       />
     </div>
 
     <!-- Ingredients and Directions -->
-    <div class="grid col-span-1 grid-cols-1 gap-4 container md:(col-span-2 grid-cols-3)">
+    <div class="grid col-span-1 grid-cols-1 gap-4 container md:(col-span-2 grid-cols-3 gap-8)">
       <div class="col-span-1">
         <div class="flex-vertical color-primary flex-1 items-center justify-between">
           <div class="w-full flex items-center px-5">
